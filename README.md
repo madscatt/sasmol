@@ -1,7 +1,7 @@
 ## SASMOL
 ## ======
 
-Library to create and manipulate molecular objects
+Library for defining molecular objects to create simulation and analysis programs
 
 To install:
 
