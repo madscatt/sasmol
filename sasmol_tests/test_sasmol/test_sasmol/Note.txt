@@ -1,0 +1,4 @@
+test_intg_sasio_SasAtm_type.py: sasio.Files.readpdb seems not getting the right moltype
+test_intg_sasio_SasAtm_number_of_frames.py: number_of_frames should have a consistent setter and getter
+
+NOT DONE YET: Finished up to all the sasio setter/getter (setCharge)

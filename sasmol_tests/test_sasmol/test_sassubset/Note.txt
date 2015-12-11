@@ -1,0 +1,1 @@
+No error handling for error returns in init_child
