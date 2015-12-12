@@ -36,7 +36,7 @@ def log(logfile,line):
 def compile_extensions(logfile,current_path,python):
 
     spath = current_path
-    path = current_path+'/extensions/'
+    path = current_path+'src/extensions/'
     dpath = path+'dcdio/'
     mpath = path+'mask/'
     vpath = path+'sasview/'
@@ -119,17 +119,17 @@ setup(name='sasmol',
 		"Programming Language :: Python :: C :: Fortran",
 		"Topic :: Scientific/Engineering :: Chemistry :: Physics"],
 
-	package_dir={'sasmol':''},
+	package_dir={'src':''},
 
-	packages=['sasmol','test_sasmol','test_sasmol/util','extensions','extensions/dcdio','extensions/sasview','extensions/mask','extensions/matrix_math'],
+    packages=['sasmol','test_sasmol','test_sasmol/util','sasmol/extensions','sasmol/extensions/dcdio','sasmol/extensions/sasview','sasmol/extensions/mask','sasmol/extensions/matrix_math'],
 
 	ext_modules=[
-	Extension('sasmol._dcdio',['extensions/dcdio/dcdio.i','extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._sasview_vmd',['extensions/sasview/sasview_vmd.i','extensions/sasview/sasview_vmd.c','extensions/sasview/imd.c','extensions/sasview/vmdsock.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._mask',['extensions/mask/mask.i','extensions/mask/mask.c'],include_dirs=[numpy_include]),
-	Extension('sasmol.foverlap',['extensions/overlap/foverlap.f'],include_dirs=[numpy_include]),
-	Extension('sasmol.matrix_math',['extensions/matrix_math/matrix_math.f'],include_dirs=[numpy_include])],
-	data_files=[('extensions/dcdio',['extensions/dcdio/dcdio.i','extensions/dcdio/numpy.i']),('extensions/mask',['extensions/mask/mask.i','extensions/mask/numpy.i'])
+	Extension('sasmol._dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),
+	Extension('sasmol._sasview_vmd',['src/extensions/sasview/sasview_vmd.i','src/extensions/sasview/sasview_vmd.c','src/extensions/sasview/imd.c','src/extensions/sasview/vmdsock.c'],include_dirs=[numpy_include]),
+	Extension('sasmol._mask',['src/extensions/mask/mask.i','src/extensions/mask/mask.c'],include_dirs=[numpy_include]),
+	Extension('sasmol.foverlap',['src/extensions/overlap/foverlap.f'],include_dirs=[numpy_include]),
+	Extension('sasmol.matrix_math',['src/extensions/matrix_math/matrix_math.f'],include_dirs=[numpy_include])],
+	data_files=[('src/extensions/dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/numpy.i']),('src/extensions/mask',['src/extensions/mask/mask.i','src/extensions/mask/numpy.i'])
 ]
 	)
 
@@ -140,6 +140,10 @@ spath = os.getcwd()+os.path.sep
 sys.path.append('./')
 python = sys.executable
 logfile = open('log_sasmol_setup_install.txt','w')
+
+print 'current_path = ',current_path
+print 'current_path = ',current_path
+print 'current_path = ',current_path
 
 compile_extensions(logfile,current_path,python)
 	
