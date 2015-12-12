@@ -121,8 +121,7 @@ setup(name='sasmol',
 
 	package_dir={'sasmol':''},
 
-	packages=['sasmol','extensions','extensions/dcdio','extensions/sasview','extensions/mask','extensions/matrix_math'],
-	#packages=['sasmol','extensions','extensions/dcdio','extensions/sasview','extensions/mask','extensions/matrix_math','core_testing'],
+	packages=['sasmol','test_sasmol','test_sasmol/util','extensions','extensions/dcdio','extensions/sasview','extensions/mask','extensions/matrix_math'],
 
 	ext_modules=[
 	Extension('sasmol._dcdio',['extensions/dcdio/dcdio.i','extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),

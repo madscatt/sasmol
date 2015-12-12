@@ -16,12 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env, util
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main, skipIf
 from mocker import Mocker, MockerTestCase
 
-from sassie.sasmol import sasmol, dcdio
+from sasmol.sasmol import sasmol, dcdio
 
 import os, sys, string
 
