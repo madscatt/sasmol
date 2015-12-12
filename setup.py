@@ -14,6 +14,7 @@ from numpy.distutils.core import Extension, setup
 #
 #       12/01/2009      --      initial coding              :       jc
 #       11/05/2015      --      adapted for sasmol coding   :       jc
+#       12/12/2015      --      refactored for distribution :       jc
 #
 #LC      1         2         3         4         5         6         7
 #LC4567890123456789012345678901234567890123456789012345678901234567890123456789
@@ -35,12 +36,13 @@ def log(logfile,line):
 
 def compile_extensions(logfile,current_path,python):
 
+
     spath = current_path
-    path = current_path+'src/extensions/'
-    dpath = path+'dcdio/'
-    mpath = path+'mask/'
-    vpath = path+'sasview/'
-    mmpath = path+'matrix_math/'
+    path = os.path.join(current_path,src,extensions) 
+    dpath = os.path.join(path,'dcdio') 
+    mpath = os.path.join(path,'mask') 
+    vpath = os.path.join(path,'sasview') 
+    mmpath = os.path.join(path,'matrix_math') 
 
     os.chdir(dpath)
     buildst1 = python +' setup_dcdio.py build'
@@ -64,13 +66,13 @@ def compile_extensions(logfile,current_path,python):
 
     os.chdir(current_path)
 
-    cpst1 = 'cp '+dpath+'build/lib*/_dcdio.so '+spath
-    cpst2 = 'cp '+dpath+'dcdio.py '+spath
-    cpst3 = 'cp '+mpath+'build/lib*/_mask.so '+spath
-    cpst4 = 'cp '+mpath+'mask.py '+spath
-    cpst5 = 'cp '+vpath+'build/lib*/_sasview_vmd.so '+spath
-    cpst6 = 'cp '+vpath+'sasview_vmd.py '+spath
-    cpst7 = 'cp '+mmpath+'build/lib*/matrix_math.so '+spath
+    cpst1 = 'cp '+os.path.join(dpath,'build','lib*','_dcdio.so')+' '+spath
+    cpst2 = 'cp '+os.path.join(dpath,'dcdio.py')+' '+spath
+    cpst3 = 'cp '+os.path.join(mpath,'build','lib*','_mask.so')+' '+spath
+    cpst4 = 'cp '+os.path.join(mpath,'mask.py')+' '+spath
+    cpst5 = 'cp '+os.path.join(vpath,'build','lib*','_sasview_vmd.so')+' '+spath
+    cpst6 = 'cp '+os.path.join(vpath,'sasview_vmd.py')+' '+spath
+    cpst7 = 'cp '+os.path.join(mmpath,'build','lib*','matrix_math.so')+' '+spath
 
     result = os.popen(cpst1).readlines()
     for line in result: log(logfile,line)
@@ -119,25 +121,32 @@ setup(name='sasmol',
 		"Programming Language :: Python :: C :: Fortran",
 		"Topic :: Scientific/Engineering :: Chemistry :: Physics"],
 
-	package_dir={'src':''},
+	package_dir={'sasmol':'.'},
 
-    packages=['sasmol','test_sasmol','test_sasmol/util','sasmol/extensions','sasmol/extensions/dcdio','sasmol/extensions/sasview','sasmol/extensions/mask','sasmol/extensions/matrix_math'],
+    packages=['sasmol','test_sasmol','test_sasmol/util','extensions','extensions/dcdio','extensions/sasview','extensions/mask','extensions/matrix_math'],
 
 	ext_modules=[
-	Extension('sasmol._dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._sasview_vmd',['src/extensions/sasview/sasview_vmd.i','src/extensions/sasview/sasview_vmd.c','src/extensions/sasview/imd.c','src/extensions/sasview/vmdsock.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._mask',['src/extensions/mask/mask.i','src/extensions/mask/mask.c'],include_dirs=[numpy_include]),
-	Extension('sasmol.foverlap',['src/extensions/overlap/foverlap.f'],include_dirs=[numpy_include]),
-	Extension('sasmol.matrix_math',['src/extensions/matrix_math/matrix_math.f'],include_dirs=[numpy_include])],
-	data_files=[('src/extensions/dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/numpy.i']),('src/extensions/mask',['src/extensions/mask/mask.i','src/extensions/mask/numpy.i'])
+	Extension('sasmol._dcdio',['extensions/dcdio/dcdio.i','extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),
+	Extension('sasmol._sasview_vmd',['extensions/sasview/sasview_vmd.i','extensions/sasview/sasview_vmd.c','extensions/sasview/imd.c','extensions/sasview/vmdsock.c'],include_dirs=[numpy_include]),
+	Extension('sasmol._mask',['extensions/mask/mask.i','extensions/mask/mask.c'],include_dirs=[numpy_include]),
+	Extension('sasmol.foverlap',['extensions/overlap/foverlap.f'],include_dirs=[numpy_include]),
+	Extension('sasmol.matrix_math',['extensions/matrix_math/matrix_math.f'],include_dirs=[numpy_include])],
+	data_files=[('extensions/dcdio',['extensions/dcdio/dcdio.i','extensions/dcdio/numpy.i']),('extensions/mask',['extensions/mask/mask.i','extensions/mask/numpy.i'])
 ]
 	)
 
+
+sys.exit()
+
+
 print '>>> copying files for installation\n\n'
+
+#src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
+#old_path = os.getcwd()
 
 current_path = os.getcwd()
 spath = os.getcwd()+os.path.sep
-sys.path.append('./')
+#sys.path.append('./')
 python = sys.executable
 logfile = open('log_sasmol_setup_install.txt','w')
 
