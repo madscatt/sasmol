@@ -7,7 +7,6 @@
 import os,sys
 from distutils.core import setup
 from distutils      import sysconfig
-#from distutils.extension import Extension
 from numpy.distutils.core import Extension, setup
 
 #       SETUP
@@ -26,75 +25,7 @@ from numpy.distutils.core import Extension, setup
 
 '''
 
-def log(logfile,line):
-
-    print line
-
-    logfile.write("%s\n" % (line))
-
-    return
-
-def compile_extensions(logfile,current_path,python):
-
-
-    spath = current_path
-    path = os.path.join(current_path,src,extensions) 
-    dpath = os.path.join(path,'dcdio') 
-    mpath = os.path.join(path,'mask') 
-    vpath = os.path.join(path,'sasview') 
-    mmpath = os.path.join(path,'matrix_math') 
-
-    os.chdir(dpath)
-    buildst1 = python +' setup_dcdio.py build'
-    result = os.popen(buildst1).readlines()
-    for line in result: log(logfile,line)
-
-    os.chdir(mpath)
-    buildst2 = python +' setup_mask.py build'
-    result = os.popen(buildst2).readlines()
-    for line in result: log(logfile,line)
-
-    os.chdir(vpath)
-    buildst3 = python +' setup_sasview_vmd.py build'
-    result = os.popen(buildst3).readlines()
-    for line in result: log(logfile,line)
-
-    os.chdir(mmpath)
-    buildst4 = python +' setup_matrix_multiply.py build'
-    result = os.popen(buildst4).readlines()
-    for line in result: log(logfile,line)
-
-    os.chdir(current_path)
-
-    cpst1 = 'cp '+os.path.join(dpath,'build','lib*','_dcdio.so')+' '+spath
-    cpst2 = 'cp '+os.path.join(dpath,'dcdio.py')+' '+spath
-    cpst3 = 'cp '+os.path.join(mpath,'build','lib*','_mask.so')+' '+spath
-    cpst4 = 'cp '+os.path.join(mpath,'mask.py')+' '+spath
-    cpst5 = 'cp '+os.path.join(vpath,'build','lib*','_sasview_vmd.so')+' '+spath
-    cpst6 = 'cp '+os.path.join(vpath,'sasview_vmd.py')+' '+spath
-    cpst7 = 'cp '+os.path.join(mmpath,'build','lib*','matrix_math.so')+' '+spath
-
-    result = os.popen(cpst1).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst2).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst3).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst4).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst5).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst6).readlines()
-    for line in result: log(logfile,line)
-    result = os.popen(cpst7).readlines()
-    for line in result: log(logfile,line)
-
-    return
-
-# Third-party modules - we depend on numpy for everything
 import numpy
-
-# Obtain the numpy include directory.  This logic works across numpy versions.
 
 try:
     numpy_include = numpy.get_include()
@@ -121,60 +52,18 @@ setup(name='sasmol',
 		"Programming Language :: Python :: C :: Fortran",
 		"Topic :: Scientific/Engineering :: Chemistry :: Physics"],
 
-	#package_dir={'':'src'}, ### does not work ... looks for src/sasmol directory
 	package_dir={'sasmol':'src'},
 
     packages=['sasmol','sasmol.test_sasmol','sasmol.test_sasmol.util','sasmol.extensions','sasmol.extensions.dcdio','sasmol.extensions.sasview','sasmol.extensions.mask','sasmol.extensions.matrix_math'],
 
 	ext_modules=[
-	Extension('sasmol._dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/dcdio.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._sasview_vmd',['src/extensions/sasview/sasview_vmd.i','src/extensions/sasview/sasview_vmd.c','src/extensions/sasview/imd.c','src/extensions/sasview/vmdsock.c'],include_dirs=[numpy_include]),
-	Extension('sasmol._mask',['src/extensions/mask/mask.i','src/extensions/mask/mask.c'],include_dirs=[numpy_include]),
-	Extension('sasmol.foverlap',['src/extensions/overlap/foverlap.f'],include_dirs=[numpy_include]),
-	Extension('sasmol.matrix_math',['src/extensions/matrix_math/matrix_math.f'],include_dirs=[numpy_include])],
-	data_files=[('src/extensions/dcdio',['src/extensions/dcdio/dcdio.i','src/extensions/dcdio/numpy.i']),('src/extensions/mask',['src/extensions/mask/mask.i','src/extensions/mask/numpy.i'])
+	Extension('sasmol._dcdio',[os.path.join('src','extensions','dcdio','dcdio.i'),os.path.join('src','extensions','dcdio','dcdio.c')],include_dirs=[numpy_include]),
+	Extension('sasmol._sasview_vmd',[os.path.join('src','extensions','sasview','sasview_vmd.i'),os.path.join('src','extensions','sasview','sasview_vmd.c'),os.path.join('src','extensions','sasview','imd.c'),os.path.join('src','extensions','sasview','vmdsock.c')],include_dirs=[numpy_include]),
+	Extension('sasmol._mask',[os.path.join('src','extensions','mask','mask.i'),os.path.join('src','extensions','mask','mask.c')],include_dirs=[numpy_include]),
+	Extension('sasmol.foverlap',[os.path.join('src','extensions','overlap','foverlap.f')],include_dirs=[numpy_include]),
+	Extension('sasmol.matrix_math',[os.path.join('src','extensions','matrix_math','matrix_math.f')],include_dirs=[numpy_include])],
+	data_files=[(os.path.join('src','extensions','dcdio'),[os.path.join('src','extensions','dcdio','dcdio.i'),os.path.join('src','extensions','dcdio','numpy.i')]),(os.path.join('src','extensions','mask'),[os.path.join('src','extensions','mask','mask.i'),os.path.join('src','extensions','mask','numpy.i')])
 ]
 	)
 
 
-sys.exit()
-
-
-print '>>> copying files for installation\n\n'
-
-#src_path = os.path.dirname(os.path.abspath(sys.argv[0]))
-#old_path = os.getcwd()
-
-current_path = os.getcwd()
-spath = os.getcwd()+os.path.sep
-#sys.path.append('./')
-python = sys.executable
-logfile = open('log_sasmol_setup_install.txt','w')
-
-print 'current_path = ',current_path
-print 'current_path = ',current_path
-print 'current_path = ',current_path
-
-compile_extensions(logfile,current_path,python)
-	
-if(not os.path.isfile(spath+'_dcdio.so')):
-	print "_dcdio.so did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'dcdio.py')):
-	print "dcdio.py did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'_mask.so')):
-	print "_mask.so did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'mask.py')):
-	print "mask.py did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'_sasview_vmd.so')):
-	print "_sasview_vmd.so did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'sasview_vmd.py')):
-	print "sasview_vmd.py did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
-if(not os.path.isfile(spath+'matrix_math.so')):
-	print "matrix_math.so did not install correctly!\n\nINSTALLATION STOPPING NOW\n\n"
-	sys.exit()
