@@ -1,9 +1,8 @@
 import os
 
 import numpy as np
-import sassie.sasmol.sasmol as s
-import sassie.sasmol.dcdio as dcdio
-
+import sasmol.sasmol as s
+import sasmol.dcdio as dcdio
 
 def generate(fin='rna.pdb', fout='rna.dcd', frames=1000):
   path = os.path.dirname(os.path.realpath(__file__))

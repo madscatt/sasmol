@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,12 +18,7 @@
 
 from unittest import main 
 from mocker import Mocker, MockerTestCase
-from sassie.sasmol import sasio
-
-
-
-
-
+import sasmol.sasio as sasio
 
 class Test_intg_sasmol_Files_init(MockerTestCase):
 

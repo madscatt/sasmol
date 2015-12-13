@@ -1,17 +1,14 @@
 opendcd: the file will be cleared and overwritten if existing. Is this expected? Or should we name it open_dcd_write
 opendcd: should we write a header to it?
 
-
 Should the following two be moved/removed from sasio since they are never used?
 writedcd_header: the function will write a header to a dcd file, without explicitly returning anything.
 writedcd_step: same thing above
-
 
 opendcd (integrated with dcdio.open_dcd_read): can go up to 6.4gb dcd with no problems
 closedcd (integrated with dcdio.close_dcd_write): can go up to 6.4gb dcd with no problems
 open_dcd_read: can go up to 6.4gb dcd with no problems
 close_dcd_read: can go up to 6.4gb dcd with no problems
-
 
 readdcd:>=1.2g (>1.0g)
 *** error: can't allocate region

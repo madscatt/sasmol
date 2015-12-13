@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,12 +20,10 @@ from sasmol.test_sasmol.util import env, util
 from unittest import main, skipIf
 from mocker import Mocker, MockerTestCase
 
-#from sasmol.sasmol import sasmol, dcdio
 import sasmol.sasmol as sasmol
 import sasmol.dcdio as dcdio
 
 import os, sys, string
-
 
 DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/dcd_common/'
 

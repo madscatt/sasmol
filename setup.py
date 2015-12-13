@@ -1,5 +1,5 @@
 '''
-    SASSIE  Copyright (C) 2011 Joseph E. Curtis
+    SASMOL  Copyright (C) 2009-2016 Joseph E. Curtis
     This program comes with ABSOLUTELY NO WARRANTY;
     This is free software, and you are welcome to redistribute it under certain
     conditions; see http://www.gnu.org/licenses/gpl-3.0.html for details.
@@ -12,8 +12,7 @@ from numpy.distutils.core import Extension, setup
 #       SETUP
 #
 #       12/01/2009      --      initial coding              :       jc
-#       11/05/2015      --      adapted for sasmol coding   :       jc
-#       12/12/2015      --      refactored for distribution :       jc
+#       11/05/2015      --      for sasmol distribution     :       jc
 #
 #LC      1         2         3         4         5         6         7
 #LC4567890123456789012345678901234567890123456789012345678901234567890123456789
@@ -40,7 +39,7 @@ setup(name='sasmol',
 	author='Joseph E. Curtis',
 	author_email='joseph.curtis@nist.gov',
 	license='GPL 3',
-	url='www.smallangles.net/sassie',
+	url='https://github.com/madscatt/sasmol',
 	platforms='Linux, Mac OS X',
 	description=("A library of methods to write software for molecular systems"),
 	long_description=read('README.md'),	

@@ -675,21 +675,24 @@ class Files(object):
 #
 ### 	OPEN 	need to re-factor the exception statements to a uniform reporting mechanism
 #
-            if(lins[0]=='MODEL'):
-                if modelON:
-                    raise Exception, 'Encountered two consecutive MODEL lines' 
-                if (num_counts_this_model != 0):
-                    raise Exception, 'There should not be atoms after ENDMDL and before MODEL lines'
-                modelON = True
-            elif(lins[0]=='ENDMDL'):
-                if not modelON:
-                    raise Exception, 'Encountered two consecutive ENDMDL lines'
-                modelON = False
-                num_counts_per_model.append(num_counts_this_model)
-                num_counts_this_model = 0
-            elif(lins[0]=='END'):
-                num_counts_per_end.append(num_counts_this_end)
-                num_counts_this_end = 0
+            try:
+                if(lins[0]=='MODEL'):
+                    if modelON:
+                        raise Exception, 'Encountered two consecutive MODEL lines' 
+                    if (num_counts_this_model != 0):
+                        raise Exception, 'There should not be atoms after ENDMDL and before MODEL lines'
+                    modelON = True
+                elif(lins[0]=='ENDMDL'):
+                    if not modelON:
+                        raise Exception, 'Encountered two consecutive ENDMDL lines'
+                    modelON = False
+                    num_counts_per_model.append(num_counts_this_model)
+                    num_counts_this_model = 0
+                elif(lins[0]=='END'):
+                    num_counts_per_end.append(num_counts_this_end)
+                    num_counts_this_end = 0
+            except:
+                pass
 			#
             if((record_name == 'ATOM' or record_name == 'HETATM')):
                 count_index += 1
