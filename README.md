@@ -7,3 +7,8 @@ To install:
 
 python setup.py install
 
+dependencies:
+
+numpy
+mocker
+
