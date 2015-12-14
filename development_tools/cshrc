@@ -1,0 +1,12 @@
+unset autologout
+set autologout=0
+
+alias gpython '/Users/curtisj/anaconda2_git/bin/python2.7'
+
+alias cdsm 'cd /Users/curtisj/git_working_copies/sasmol'
+alias cdsmt 'cd /Users/curtisj/git_working_copies/sasmol/src/test_sasmol/manual_tests'
+
+alias csm 'rm -Rf /Users/curtisj/anaconda2_git/lib/python2.7/site-packages/sasmol* ; pushd . ; cdsm ; gpython setup.py install ; cdsmt ; gpython test.py ' # popd'
+
+alias gnosetests '/Users/curtisj/anaconda2_git/bin/nosetests -P '
+
