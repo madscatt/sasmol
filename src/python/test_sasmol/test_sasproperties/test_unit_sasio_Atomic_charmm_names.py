@@ -18,11 +18,7 @@ from sassie.sasmol import sasmol
 
 import os
 
-
-
-
 DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasproperties/'
-
 
 class Test_unit_sasproperties_Atomic_charmm_names(MockerTestCase):
 

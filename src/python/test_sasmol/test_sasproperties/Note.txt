@@ -1,1 +1,1 @@
-mino_acid_sld is not tested
+amino_acid_sld is not tested
