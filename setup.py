@@ -51,17 +51,17 @@ setup(name='sasmol',
 		"Programming Language :: Python :: C :: Fortran",
 		"Topic :: Scientific/Engineering :: Chemistry :: Physics"],
 
-	package_dir={'sasmol':'src'},
+	package_dir={'sasmol':os.path.join('src','python')},
 
     packages=['sasmol','sasmol.test_sasmol','sasmol.test_sasmol.util','sasmol.extensions','sasmol.extensions.dcdio','sasmol.extensions.sasview','sasmol.extensions.mask','sasmol.extensions.matrix_math'],
 
 	ext_modules=[
-	Extension('sasmol._dcdio',[os.path.join('src','extensions','dcdio','dcdio.i'),os.path.join('src','extensions','dcdio','dcdio.c')],include_dirs=[numpy_include]),
-	Extension('sasmol._sasview_vmd',[os.path.join('src','extensions','sasview','sasview_vmd.i'),os.path.join('src','extensions','sasview','sasview_vmd.c'),os.path.join('src','extensions','sasview','imd.c'),os.path.join('src','extensions','sasview','vmdsock.c')],include_dirs=[numpy_include]),
-	Extension('sasmol._mask',[os.path.join('src','extensions','mask','mask.i'),os.path.join('src','extensions','mask','mask.c')],include_dirs=[numpy_include]),
-	Extension('sasmol.foverlap',[os.path.join('src','extensions','overlap','foverlap.f')],include_dirs=[numpy_include]),
-	Extension('sasmol.matrix_math',[os.path.join('src','extensions','matrix_math','matrix_math.f')],include_dirs=[numpy_include])],
-	data_files=[(os.path.join('src','extensions','dcdio'),[os.path.join('src','extensions','dcdio','dcdio.i'),os.path.join('src','extensions','dcdio','numpy.i')]),(os.path.join('src','extensions','mask'),[os.path.join('src','extensions','mask','mask.i'),os.path.join('src','extensions','mask','numpy.i')])
+	Extension('sasmol._dcdio',[os.path.join('src','python','extensions','dcdio','dcdio.i'),os.path.join('src','python','extensions','dcdio','dcdio.c')],include_dirs=[numpy_include]),
+	Extension('sasmol._sasview_vmd',[os.path.join('src','python','extensions','sasview','sasview_vmd.i'),os.path.join('src','python','extensions','sasview','sasview_vmd.c'),os.path.join('src','python','extensions','sasview','imd.c'),os.path.join('src','python','extensions','sasview','vmdsock.c')],include_dirs=[numpy_include]),
+	Extension('sasmol._mask',[os.path.join('src','python','extensions','mask','mask.i'),os.path.join('src','python','extensions','mask','mask.c')],include_dirs=[numpy_include]),
+	Extension('sasmol.foverlap',[os.path.join('src','python','extensions','overlap','foverlap.f')],include_dirs=[numpy_include]),
+	Extension('sasmol.matrix_math',[os.path.join('src','python','extensions','matrix_math','matrix_math.f')],include_dirs=[numpy_include])],
+	data_files=[(os.path.join('src','python','extensions','dcdio'),[os.path.join('src','python','extensions','dcdio','dcdio.i'),os.path.join('src','python','extensions','dcdio','numpy.i')]),(os.path.join('src','python','extensions','mask'),[os.path.join('src','python','extensions','mask','mask.i'),os.path.join('src','python','extensions','mask','numpy.i')])
 ]
 	)
 
