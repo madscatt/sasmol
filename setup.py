@@ -53,12 +53,7 @@ setup(name='sasmol',
 
 	package_dir={'sasmol':os.path.join('src','python')},
 
-#__init__.py     test_sascalc/       test_sasop/
-#data/           test_sasio/     test_sasproperties/
-#manual_tests/       test_sasmath/       test_sassubset/
-#script/         test_sasmol/        util/
-
-    packages=['sasmol','sasmol.test_sasmol','sasmol.test_sasmol.util','sasmol.test_sasmol.manual_tests','sasmol.test_sasmol.data','sasmol.test_sasmol.data.pdb_common','sasmol.test_sasmol.data.dcd_common','sasmol.test_sasmol.data.sasmol','sasmol.test_sasmol.data.sasmol.sascalc','sasmol.test_sasmol.data.sasmol.sasio','sasmol.test_sasmol.data.sasmol.sasmath','sasmol.test_sasmol.data.sasmol.sasmol','sasmol.test_sasmol.data.sasmol.sasop','sasmol.test_sasmol.data.sasmol.sasproperties','sasmol.test_sasmol.test_sascalc','sasmol.test_sasmol.test_sasio','sasmol.test_sasmol.test_sasmath','sasmol.test_sasmol.test_sasmol','sasmol.test_sasmol.test_sasop','sasmol.test_sasmol.test_sasproperties','sasmol.test_sasmol.test_sassubset','sasmol.extensions','sasmol.extensions.dcdio','sasmol.extensions.sasview','sasmol.extensions.mask','sasmol.extensions.matrix_math'],
+    packages=['sasmol','sasmol.test_sasmol','sasmol.test_sasmol.util','sasmol.test_sasmol.manual_tests','sasmol.test_sasmol.data','sasmol.test_sasmol.data.pdb_common','sasmol.test_sasmol.data.dcd_common','sasmol.test_sasmol.data.sasmol','sasmol.test_sasmol.data.sasmol.sascalc','sasmol.test_sasmol.data.sasmol.sasio','sasmol.test_sasmol.data.sasmol.sasio.test-results','sasmol.test_sasmol.data.sasmol.sasmath','sasmol.test_sasmol.data.sasmol.sasmol','sasmol.test_sasmol.data.sasmol.sasop','sasmol.test_sasmol.data.sasmol.sasproperties','sasmol.test_sasmol.test_sascalc','sasmol.test_sasmol.test_sasio','sasmol.test_sasmol.test_sasmath','sasmol.test_sasmol.test_sasmol','sasmol.test_sasmol.test_sasop','sasmol.test_sasmol.test_sasproperties','sasmol.test_sasmol.test_sassubset','sasmol.extensions','sasmol.extensions.dcdio','sasmol.extensions.sasview','sasmol.extensions.mask','sasmol.extensions.matrix_math'],
 	
     ext_modules=[
 	Extension('sasmol._dcdio',[os.path.join('src','python','extensions','dcdio','dcdio.i'),os.path.join('src','python','extensions','dcdio','dcdio.c')],include_dirs=[numpy_include]),
@@ -143,6 +138,4 @@ setup(name='sasmol',
                    ]
 	)
 
-# (jc@air)sasmol/sascalc% ls
-#1ATN.pdb        1CRN-rot-shift.pdb  1CRN-rot.pdb
 
