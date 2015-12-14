@@ -29,8 +29,9 @@ import warnings; warnings.filterwarnings('ignore')
 
 floattype=os.environ['SASSIE_FLOATTYPE']
 
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/pdb_common/'
-moduleDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/sasmol/sasio/'
+DataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','pdb_common')+os.path.sep
+moduleDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','sasmol','sasio')+os.path.sep
+
 
 class Test_intg_sasio_Files_write_pdb(MockerTestCase):
 

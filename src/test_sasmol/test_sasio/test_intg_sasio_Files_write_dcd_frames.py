@@ -26,10 +26,9 @@ import os
 
 floattype=os.environ['SASSIE_FLOATTYPE']
 
-pdbDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/pdb_common/'
-dcdDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/dcd_common/'
-moduleDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/sasmol/sasio/'
-
+pdbDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','pdb_common')+os.path.sep
+dcdDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','dcd_common')+os.path.sep
+moduleDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','sasmol','sasio')+os.path.sep
 
 class Test_intg_sasio_Files_write_dcd(MockerTestCase):
 
