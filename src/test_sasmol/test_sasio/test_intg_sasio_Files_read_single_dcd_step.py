@@ -27,7 +27,7 @@ import os
 
 floattype=os.environ['SASSIE_FLOATTYPE']
 
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/dcd_common/'
+DataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/dcd_common/'
 
 class Test_intg_sasio_Files_read_single_dcd_step(MockerTestCase):
 

@@ -1,3 +1,8 @@
+replaced all sassie w/ sasmol
+
+need to fix relative path using os.path.join()
+
+
 opendcd: the file will be cleared and overwritten if existing. Is this expected? Or should we name it open_dcd_write
 opendcd: should we write a header to it?
 

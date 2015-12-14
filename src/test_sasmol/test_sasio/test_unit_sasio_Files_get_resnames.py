@@ -24,7 +24,7 @@ import sasmol.sasmol as sasmol
 
 import os
 
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasproperties/'
+DataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/sasmol/sasproperties/'
 
 class Test_unit_sasio_Files_get_resnames(MockerTestCase):
 

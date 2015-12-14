@@ -1,6 +1,5 @@
 import filecmp
 
-
 def cmp_skip(f1, f2, skip=[]):
    '''
    compare two text files by skipping some lines

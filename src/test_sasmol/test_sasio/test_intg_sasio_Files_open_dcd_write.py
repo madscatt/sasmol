@@ -25,9 +25,9 @@ import sasmol.dcdio as dcdio
 
 import os, sys, string, shutil
 
-pdbDataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/pdb_common/'
-dcdDataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/dcd_common/'
-moduleDataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasio/'
+pdbDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/pdb_common/'
+dcdDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/dcd_common/'
+moduleDataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/sasmol/sasio/'
 
 
 class Test_intg_sasio_Files_open_dcd_write(MockerTestCase):

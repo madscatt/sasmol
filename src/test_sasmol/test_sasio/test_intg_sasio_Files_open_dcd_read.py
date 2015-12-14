@@ -24,7 +24,7 @@ import sasmol.sasmol as sasmol
 
 import os
 
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/dcd_common/'
+DataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/dcd_common/'
 
 
 class Test_intg_sasio_Files_open_dcd_read(MockerTestCase):
