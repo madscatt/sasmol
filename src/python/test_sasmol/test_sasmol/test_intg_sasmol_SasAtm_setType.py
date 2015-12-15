@@ -24,7 +24,6 @@ from sassie.sasmol import sasmol, sasop, sascalc
 
 import numpy, os, copy
 
-
 import warnings; warnings.filterwarnings('ignore')
 
 floattype=os.environ['SASSIE_FLOATTYPE']
