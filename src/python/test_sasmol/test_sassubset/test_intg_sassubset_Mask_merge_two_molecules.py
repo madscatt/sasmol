@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env
+from sasmol.test_sasmol.util import env
 
 """
 Integration test for sasio.sassubset.Mask.merge_two_molecules
@@ -63,17 +62,14 @@ merge a problem pdb (1PSI) with a large protein complex (groel) (Skipped as SASS
 from unittest import main,skipIf 
 from mocker import Mocker, MockerTestCase, ARGS
 
-from sassie.sasmol import sasmol,sassubset
-from sassie.core_testing.util import env
+import sasmol.sasmol as sasmol
+import sasmol.sassubset as sassubset
 
 import numpy
 
-
 import os
 
-
-PdbDataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/pdb_common/'
-
+PdbDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','pdb_common')+os.path.sep
 
 class Test_sassubset_Mask_merge_two_molecules(MockerTestCase): 
  
