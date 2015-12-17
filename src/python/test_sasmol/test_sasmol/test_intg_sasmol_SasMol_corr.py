@@ -16,14 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main 
 from mocker import Mocker, MockerTestCase
-from sassie.sasmol import sasmol
-
-
-
-
+import sasmol.sasmol as sasmol
 
 class Test_intg_sasmol_SasMol_corr(MockerTestCase):
 
