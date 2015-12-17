@@ -78,7 +78,8 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
       self.assertEqual([item.chain() for item in self.o.init_child('chains')],[['N']])
       self.assertEqual([item.occupancy() for item in self.o.init_child('occupancies')],[['1.00']])
       self.assertEqual([item.beta() for item in self.o.init_child('betas')],[['36.37']])
-      self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['DUM0']])
+      #self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['DUM0']])
+      self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['N']])
       self.assertEqual([item.element() for item in self.o.init_child('elements')],[['N']])
 
    def test_2AAD_names(self):
@@ -220,7 +221,8 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
           result.append(item.segname())
       print 'result \n',result
       #
-      expected = [['DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0']]
+      #expected = [['DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0']]
+      expected = [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']]
       print 'expected \n',expected
       #
       self.assertEqual(expected, result)

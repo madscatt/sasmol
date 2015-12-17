@@ -37,6 +37,7 @@ LU
 MG
 MN
 MO
+NE
 NI
 OS
 PD
@@ -72,3 +73,9 @@ Y
 YB
 ZN
 ZR
+SS
+CAL
+DUM
+POT
+CES
+CLA
