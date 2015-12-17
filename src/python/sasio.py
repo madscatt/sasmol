@@ -480,11 +480,6 @@ class Files(object):
                 print 'element = ',self._element[i],' : type = ',type(self._element[i])
                 print 'charge = ',self._charge[i],' : type = ',type(self._charge[i])
 
-        if conect:
-            conect_lines = self.create_conect_pdb_lines()
-            for line in conect_lines:
-                infile.write(line + '\n')
-
         if 'model' in kwargs:
             infile.write("ENDMDL\n")
         else:
@@ -492,6 +487,11 @@ class Files(object):
 
         if 'final' in kwargs:
             infile.write("END\n")
+
+        if conect:
+            conect_lines = self.create_conect_pdb_lines()
+            for line in conect_lines:
+                infile.write(line + '\n')
 
         infile.close()
     

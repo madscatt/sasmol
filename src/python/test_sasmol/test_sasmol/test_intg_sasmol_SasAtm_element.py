@@ -16,19 +16,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env, util
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main 
 from mocker import Mocker, MockerTestCase
 
-from sassie.sasmol import sasmol
+import sasmol.sasmol as sasmol
 
+import os
 
-
-
-
-import os; DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasmol/'
-
+DataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','sasmol','sasmol')+os.path.sep
 
 class Test_intg_sasmol_SasAtm_element(MockerTestCase):
 

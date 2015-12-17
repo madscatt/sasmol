@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +15,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env, util
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main 
 from mocker import Mocker, MockerTestCase, ANY, ARGS, KWARGS
 
-from sassie.sasmol import sasmath,sasmol,sasio
+import sasmol.sasmol as sasmol
+import sasmol.sasmath as sasmath
+import sasmol.sasio as sasio
 
 import numpy
 
 import os
 floattype=os.environ['SASSIE_FLOATTYPE']
-
 
 class Test_sasmath_vec_scale(MockerTestCase): 
 

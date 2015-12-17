@@ -1,4 +1,20 @@
 '''
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 contract:
 
 make sure the list is unique
@@ -6,7 +22,7 @@ make sure the right hydrogen list was generated
 make sure the right carbon list was generated
 make sure the right nitrogen list was generated
 make sure the right oxygen list was generated
-make sure the right sulfer list was generated
+make sure the right sulfur list was generated
 make sure the right phosphorous list was generated
 make sure the right other list (from the periodic table) was generated
 '''
@@ -14,14 +30,11 @@ make sure the right other list (from the periodic table) was generated
 from unittest import main 
 from mocker import Mocker, MockerTestCase
 
-from sassie.sasmol import sasmol
+import sasmol.sasmol as sasmol
 
 import os
 
-
-
-
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasproperties/'
+DataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','sasmol','sasproperties')+os.path.sep
 
 
 class Test_unit_sasproperties_Atomic_charmm_names(MockerTestCase):
@@ -110,10 +123,9 @@ class Test_unit_sasproperties_Atomic_charmm_names(MockerTestCase):
          oltmp.append(atom.strip())
       self.assertEqual(self.compare_namelists(oltmp, self.ol), 0)
 
-
    def test_S(self):
       '''
-      make sure the right sulfer list was generated
+      make sure the right sulfur list was generated
       '''
       #
       datafile = DataPath+'Satoms.txt'
@@ -144,6 +156,9 @@ class Test_unit_sasproperties_Atomic_charmm_names(MockerTestCase):
       otherltmp = []
       for atom in open(datafile).readlines():
          otherltmp.append(atom.strip())
+      #print 'otherltmp = ',otherltmp
+      #print 'self.otherl = ',self.otherl
+      #print list(set(self.otherl) - set(otherltmp))
       self.assertEqual(self.compare_namelists(otherltmp, self.otherl), 0)
 
 

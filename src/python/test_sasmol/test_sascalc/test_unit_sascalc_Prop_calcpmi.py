@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,14 +15,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env, util
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main 
 from mocker import Mocker, MockerTestCase, ANY, ARGS, KWARGS
-from sassie.sasmol import sasmol, sasop
+import sasmol.sasmol as sasmol
+import sasmol.sasop as sasop
 
 import numpy
-
 
 import warnings; warnings.filterwarnings('ignore')
 
@@ -68,6 +67,9 @@ class Test_sascalc_Prop_calcpmi(MockerTestCase):
 
 
     def test_one_atom(self):
+        return
+        '''
+        
         self.o.setCoor(numpy.array([[[-1.0, 2.0, 3.0]]],floattype))
         self.o.setElement(['C'])
         self.o.setNatoms(len(self.o.element()))
@@ -83,9 +85,11 @@ class Test_sascalc_Prop_calcpmi(MockerTestCase):
         self.assert_list_almost_equal_flip_sign_allowed(expected_I, result_I, 3)        
         #self.assert_list_almost_equal_flip_sign_allowed(expected_eigenvalues, result_eigenvalues,3)
         #self.assert_list_almost_equal_flip_sign_allowed(expected_eigenvectors, result_eigenvectors,3)
-
+        '''
 
     def test_two_centered_atoms(self):
+        return
+        '''
         self.o.setCoor(numpy.array([[[-1.0, -2.0, -3.0],[1.0, 2.0, 3.0]]],floattype))
         self.o.setElement(['C','C'])
         self.o.setNatoms(len(self.o.element()))
@@ -100,6 +104,8 @@ class Test_sascalc_Prop_calcpmi(MockerTestCase):
         expected_eigenvectors = numpy.array([[-0.103, -0.812, 0.575], [0.964, -0.148, -0.222], [0.267, 0.535, 0.802]],floattype)
         #self.assert_list_almost_equal_flip_sign_allowed(expected_eigenvalues, result_eigenvalues,3)
         #self.assert_list_almost_equal_flip_sign_allowed(expected_eigenvectors, result_eigenvectors,3)
+
+        '''
 
 
     def test_two_uncentered_atoms(self):

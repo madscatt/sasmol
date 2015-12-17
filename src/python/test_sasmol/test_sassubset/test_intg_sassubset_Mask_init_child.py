@@ -1,6 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
-	 Core-Testing: Copyright (C) 2011 Hailiang Zhang, Ph.D.
+    SASMOL: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,21 +15,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from sassie.core_testing.util import env, util
+from sasmol.test_sasmol.util import env, util
 
 from unittest import main, skipIf
 from mocker import Mocker, MockerTestCase, ANY, ARGS, KWARGS
-from sassie.sasmol import sasmol
+import sasmol.sasmol as sasmol
 
 import numpy, os, copy
 
 
-
 floattype=os.environ['SASSIE_FLOATTYPE']
 
-DataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/pdb_common/'
-moduleDataPath = os.path.dirname(os.path.realpath(__file__))+'/../../data/sasmol/sasio/'
-
+DataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','pdb_common')+os.path.sep
+moduleDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','sasmol','sasio')+os.path.sep
 
 class Test_intg_sasio_Files_initialize_children(MockerTestCase):
 
@@ -81,7 +78,8 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
       self.assertEqual([item.chain() for item in self.o.init_child('chains')],[['N']])
       self.assertEqual([item.occupancy() for item in self.o.init_child('occupancies')],[['1.00']])
       self.assertEqual([item.beta() for item in self.o.init_child('betas')],[['36.37']])
-      self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['DUM0']])
+      #self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['DUM0']])
+      self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['N']])
       self.assertEqual([item.element() for item in self.o.init_child('elements')],[['N']])
 
    def test_2AAD_names(self):
@@ -223,7 +221,8 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
           result.append(item.segname())
       print 'result \n',result
       #
-      expected = [['DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0']]
+      #expected = [['DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0', 'DUM0']]
+      expected = [['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']]
       print 'expected \n',expected
       #
       self.assertEqual(expected, result)
