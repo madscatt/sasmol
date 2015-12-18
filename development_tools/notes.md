@@ -14,6 +14,25 @@
 
 ### GIT ###
 
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+
+# config:
+
+git config --list
+git config --global user.name "Joseph E. Curtis"
+git config --global user.email "madscatt@gmail.com"
+git config --global core.editor "vi"
+
+(jc@hal)git_working_copies/sasmol% cat ~/.gitignore_global 
+*~
+.DS_Store
+*.so
+*.pyc
+*.o
+
+git config --global core.excludesfile ~/.gitignore_global 
+
+
 git clone https://github.com/madscatt/sasmol.git
 
 
