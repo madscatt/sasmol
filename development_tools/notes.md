@@ -1,4 +1,20 @@
 
+### 0. Identation
+
+Here is an example snippet from a .vimrc file that defines indentation rules. Note that the entire code base will have to be filtered to implement this. Any new code should follow these rules. Developers that use other IDEs should provide their settings for others to benefit.
+
+filetype plugin on
+set smartindent
+set ts=4
+set shiftwidth=4
+set expandtab
+
+Here is the indentation rules for Wingware Python IDE (which has also been followed in Emacs24):
+
+Default Tab Size: 4
+Default Indent Size: 4
+
+
 ### SETUP.PY ###
 
 # format for data files:  ( path in site-packages, [ path + file_name of file to move] )
@@ -31,6 +47,19 @@ git config --global core.editor "vi"
 *.o
 
 git config --global core.excludesfile ~/.gitignore_global 
+
+# both of these do not seem to work ???
+
+git config --global core.autocrlf = true
+git config --global core.autocrlf = input
+
+# but if you merely edit the ~/.gitconfig file it works
+# (there are other things in this file ... only showing the autocrlf bit
+
+[core]
+    autocrlf = input
+
+# cloning
 
 
 git clone https://github.com/madscatt/sasmol.git
