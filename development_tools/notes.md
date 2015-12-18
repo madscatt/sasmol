@@ -13,7 +13,9 @@ Here is the indentation rules for Wingware Python IDE (which has also been follo
 
 Default Tab Size: 4
 Default Indent Size: 4
+Default Indent Style: Spaces Only
 
+The old existing code base may be corrected in the future using autopep ( https://pypi.python.org/pypi/autopep8/).
 
 ### SETUP.PY ###
 
