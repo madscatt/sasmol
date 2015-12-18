@@ -14,6 +14,9 @@
 
 ### GIT ###
 
+git clone https://github.com/madscatt/sasmol.git
+
+
 git checkout -b add_cpp_section
 
 ... do stuff ...
