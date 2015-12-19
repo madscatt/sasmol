@@ -9,6 +9,6 @@ python setup.py install
 
 dependencies:
 
-numpy
+numpy,
 mocker
 
