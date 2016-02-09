@@ -435,6 +435,10 @@ class Mask(object):
 		self._original_resid = original_resid
 		#self._residue_flag = residue_flag
 
+		self._conect = mol1._conect
+		for ndx, list_ndxs in mol2._conect.iteritems():
+			self._conect[ndx] = list_ndxs
+
 		return error
 
 	def copy_molecule_using_mask(self,other,mask,frame):
