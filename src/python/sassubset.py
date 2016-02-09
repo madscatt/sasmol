@@ -69,7 +69,7 @@ class Mask(object):
 		nflexible=len(flexible_residues)
 
 		nresidues=int(self.resid()[-1] - self.resid()[0]+1)
-	
+
 		farray=numpy.zeros((nflexible,natoms),numpy.long)
 
 		mask.get_mask_array(farray,name,resid,flexible_residues,nresidues,mtype)
@@ -153,7 +153,7 @@ class Mask(object):
 
 		'''
 
-		import sasmol 
+		import sasmol
 
  		at = 'len(self.'+descriptor+'())'
 		number_of_objects =  eval(at)
@@ -166,9 +166,9 @@ class Mask(object):
 			new_object = sasmol.SasMol(0)
 			at = 'self.'+descriptor+'_mask()['+str(i)+']'
 			mask = eval(at)
-			error = self.copy_molecule_using_mask(new_object,mask,frame) 
-			
-			object_list.append(new_object)	
+			error = self.copy_molecule_using_mask(new_object,mask,frame)
+
+			object_list.append(new_object)
 
 		return object_list
 
@@ -210,7 +210,7 @@ class Mask(object):
 
 		'''
 		index 	= self.index()
-		name 		= self.name()		
+		name 		= self.name()
 		loc		= self.loc()
 		resname	= self.resname()
 		chain		= self.chain()
@@ -238,7 +238,7 @@ class Mask(object):
 #
 #	basis_filter == 'name[i] == "CA" less_than 5 angstroms from name[j] == "N" '
 #
-#	basis_filter == 'name[i] == "CA" greater_than 5 angstroms from name[j] == "N" ' 
+#	basis_filter == 'name[i] == "CA" greater_than 5 angstroms from name[j] == "N" '
 #
 #	basis_filter == 'name[i] == "CA" between 3 and 5 angstroms from name[j] == "N" '
 #
@@ -249,7 +249,7 @@ class Mask(object):
 #	basis_filter == '(segname[i] == "WAT" and name[i] == "OH2") between 100 and 106 degrees from (segname[j] == "WAT" and name[j] == "H1") '
 #
 # 	--- or have the code pull out the donors and acceptors from selections?
-# 
+#
 #	basis_filter == '(resid[i] == "TIP3") between 100 and 106 degrees from (resid[j] == "TIP3")'
 #
 #	--- or define a hydrogen_bonded keyword that takes care of distance/angle & donor/acceptor
@@ -265,13 +265,13 @@ class Mask(object):
 #
 #
 		error = []
-		
+
 		preliminary_mask_array = []
 
 		natoms = self.natoms()
 
 		for i in xrange(natoms):
-		
+
 			try:
 				if(eval(basis_filter)):
 					preliminary_mask_array.append(1)
@@ -279,11 +279,11 @@ class Mask(object):
 					preliminary_mask_array.append(0)
 			except:
 				error.append('failed to evaluate filter selection '+basis_filter+' for atom '+str(i))
-				return error, preliminary_mask_array		
-		
+				return error, preliminary_mask_array
+
 		if(numpy.sum(preliminary_mask_array) == 0):
 				error.append('found no atoms using filter selection '+basis_filter)
-				return error, preliminary_mask_array		
+				return error, preliminary_mask_array
 		else:
 			mask_array = numpy.array(preliminary_mask_array, numpy.int32)
 
@@ -336,35 +336,35 @@ class Mask(object):
 		atom=[] ; index=[] ; name=[] ; loc=[] ; resname=[] ; chain=[] ; resid=[] ; rescode=[]
 		x=[] ; y=[] ; z=[] ; occupancy=[] ; beta=[] ; segname=[] ; element=[] ; charge=[] ; moltype=[]
 		original_index=[] ; original_resid=[] ; residue_flag=[]
-	
+
 		natoms1=mol1.natoms()
 		natoms2=mol2.natoms()
 
 		print 'natoms1 = ',natoms1
 		print 'natoms2 = ',natoms2
-		
-		frame = 0 
+
+		frame = 0
 
 		for i in xrange(natoms1):
 			try:
 			#if True:
 				atom.append(mol1._atom[i])
-				index.append(mol1._index[i])			
-				name.append(mol1._name[i])			
-				loc.append(mol1._loc[i])			
-				resname.append(mol1._resname[i])			
-				chain.append(mol1._chain[i])			
-				resid.append(mol1._resid[i])			
+				index.append(mol1._index[i])
+				name.append(mol1._name[i])
+				loc.append(mol1._loc[i])
+				resname.append(mol1._resname[i])
+				chain.append(mol1._chain[i])
+				resid.append(mol1._resid[i])
 				rescode.append(mol1._rescode[i])
 				x.append(mol1.coor()[frame,i,0])
 				y.append(mol1.coor()[frame,i,1])
 				z.append(mol1.coor()[frame,i,2])
-				occupancy.append(mol1._occupancy[i])			
-				beta.append(mol1._beta[i])	
-				segname.append(mol1._segname[i])	
-				element.append(mol1._element[i])	
-				charge.append(mol1._charge[i])	
-				moltype.append(mol1._moltype[i])	
+				occupancy.append(mol1._occupancy[i])
+				beta.append(mol1._beta[i])
+				segname.append(mol1._segname[i])
+				element.append(mol1._element[i])
+				charge.append(mol1._charge[i])
+				moltype.append(mol1._moltype[i])
 				original_index.append(mol1._original_index[i])
 				original_resid.append(mol1._original_resid[i])
 				residue_flag.append(mol1._residue_flag[i])
@@ -380,21 +380,21 @@ class Mask(object):
 			#if True:
 				atom.append(mol2._atom[i])
 				index.append(this_index)
-				name.append(mol2._name[i])			
-				loc.append(mol2._loc[i])			
-				resname.append(mol2._resname[i])			
-				chain.append(mol2._chain[i])			
-				resid.append(mol2._resid[i])			
-				rescode.append(mol2._rescode[i])			
+				name.append(mol2._name[i])
+				loc.append(mol2._loc[i])
+				resname.append(mol2._resname[i])
+				chain.append(mol2._chain[i])
+				resid.append(mol2._resid[i])
+				rescode.append(mol2._rescode[i])
 				x.append(mol2.coor()[frame,i,0])
 				y.append(mol2.coor()[frame,i,1])
 				z.append(mol2.coor()[frame,i,2])
-				occupancy.append(mol2._occupancy[i])			
-				beta.append(mol2._beta[i])	
-				segname.append(mol2._segname[i])	
-				element.append(mol2._element[i])	
-				charge.append(mol2._charge[i])	
-				moltype.append(mol2._moltype[i])	
+				occupancy.append(mol2._occupancy[i])
+				beta.append(mol2._beta[i])
+				segname.append(mol2._segname[i])
+				element.append(mol2._element[i])
+				charge.append(mol2._charge[i])
+				moltype.append(mol2._moltype[i])
 				original_index.append(mol2._original_index[i])
 				original_resid.append(mol2._original_resid[i])
 				residue_flag.append(mol2._residue_flag[i])
@@ -407,14 +407,14 @@ class Mask(object):
 		y=numpy.array(y,numpy.float)
 		z=numpy.array(z,numpy.float)
 
-		coor=numpy.zeros((1,natoms1+natoms2,3),numpy.float)	
+		coor=numpy.zeros((1,natoms1+natoms2,3),numpy.float)
 
 		try:
 			coor[frame,:,0]=x ; coor[frame,:,1]=y ; coor[frame,:,2]=z
 		except:
 			error.append('failed in merge molecule when assigning coordinates')
 			return error
-	
+
 		self._atom = atom
 		self._index = index
 		self._name = name
@@ -434,7 +434,7 @@ class Mask(object):
 		self._original_index = original_index
 		self._original_resid = original_resid
 		#self._residue_flag = residue_flag
-	
+
 		return error
 
 	def copy_molecule_using_mask(self,other,mask,frame):
@@ -467,7 +467,7 @@ class Mask(object):
 		atom_charge = [] ; atom_vdw = [] ; residue_flag = [] ; original_index = [] ; original_resid = []
 		unique_names = [] ; unique_resnames = [] ; unique_resids = [] ; unique_chains = []
 		unique_segnames = [] ; unique_occupancies = [] ; unique_betas = [] ; unique_elements = []
-		unique_moltypes = [] ; unique_charmm_type = []
+		unique_moltypes = [] ; unique_charmm_type = []; conect = {}
 		natoms = self.natoms()
 
 		for i in xrange(natoms):
@@ -475,22 +475,22 @@ class Mask(object):
 				try:
 				#if True:
 					atom.append(self._atom[i])
-					index.append(self._index[i])			
-					original_index.append(self._original_index[i])			
-					name.append(self._name[i])			
-					loc.append(self._loc[i])			
-					resname.append(self._resname[i])			
-					chain.append(self._chain[i])			
-					resid.append(self._resid[i])			
-					original_resid.append(self._original_resid[i])			
-					rescode.append(self._rescode[i])			
-					occupancy.append(self._occupancy[i])			
-					beta.append(self._beta[i])	
-					segname.append(self._segname[i])	
-					element.append(self._element[i])	
-					charge.append(self._charge[i])	
-					moltype.append(self._moltype[i])	
-					residue_flag.append(self._residue_flag[i])	
+					index.append(self._index[i])
+					original_index.append(self._original_index[i])
+					name.append(self._name[i])
+					loc.append(self._loc[i])
+					resname.append(self._resname[i])
+					chain.append(self._chain[i])
+					resid.append(self._resid[i])
+					original_resid.append(self._original_resid[i])
+					rescode.append(self._rescode[i])
+					occupancy.append(self._occupancy[i])
+					beta.append(self._beta[i])
+					segname.append(self._segname[i])
+					element.append(self._element[i])
+					charge.append(self._charge[i])
+					moltype.append(self._moltype[i])
+					residue_flag.append(self._residue_flag[i])
 					try:
 						charmm_type.append(self._charmm_type[i])
 					except:
@@ -499,7 +499,7 @@ class Mask(object):
 						atom_charge.append(self._atom_charge[i])
 					except:
 						pass
-					try:	
+					try:
 						atom_vdw.append(self._atom_vdw[i])
 					except:
 						pass
@@ -521,7 +521,10 @@ class Mask(object):
 
 		other.setAtom(atom)
 		other.setIndex(numpy.array(index,numpy.int))
-		other.setOriginal_index(numpy.array(original_index,numpy.int))
+
+		original_index = numpy.array(original_index,numpy.int)
+		other.setOriginal_index(original_index)
+
 		other.setName(name)
 		other.setLoc(loc)
 		other.setResname(resname)
@@ -536,7 +539,7 @@ class Mask(object):
 		other.setCharge(charge)
 		other.setMoltype(moltype)
 		other.setCharmm_type(charmm_type)
-		error,coor=self.get_coor_using_mask(frame,mask)		
+		error,coor=self.get_coor_using_mask(frame,mask)
 		other.setCoor(coor)
 		other.setNatoms(len(index))
 		other.setResidue_flag(residue_flag)
@@ -554,8 +557,12 @@ class Mask(object):
 		other._number_of_elements = len(unique_elements) ; other._elements = unique_elements
 		other._number_of_moltypes = len(unique_moltypes) ; other._moltypes = unique_moltypes
 
-		#other.setConect(self.conect)
-	
+		for oindex in original_index:
+			if oindex in self.conect():
+				conect[oindex] = self.conect[oindex]
+
+		other.setConect(conect)
+
 		return error
 
 	def duplicate_molecule(self,other,number_of_duplicates,frame,com_coor):
@@ -595,17 +602,17 @@ class Mask(object):
 
 		separate_resids = 'no'
 
-		new_coor=numpy.zeros((number_of_frames,number_of_duplicates*natoms,3),numpy.float)	
-		
+		new_coor=numpy.zeros((number_of_frames,number_of_duplicates*natoms,3),numpy.float)
+
 		for i in xrange(number_of_duplicates):
 			if(i<10):
-				this_segment = '000'+str(i)	
+				this_segment = '000'+str(i)
 			elif(i<100):
-				this_segment = '00'+str(i)	
+				this_segment = '00'+str(i)
 			elif(i<1000):
-				this_segment = '0'+str(i)	
+				this_segment = '0'+str(i)
 			else:
-				this_segment = ''+str(i)	
+				this_segment = ''+str(i)
 
 			if(separate_resids == 'yes'):
 				if(i==0):
@@ -616,33 +623,33 @@ class Mask(object):
 			for j in xrange(natoms):
 				try:
 					atom.append(self._atom[j])
-					#index.append(self._index[j])			
+					#index.append(self._index[j])
 					index.append(str(count)) ; count += 1
 					original_index.append(self._original_index[j])
-					name.append(self._name[j])			
-					loc.append(self._loc[j])	
-					resname.append(self._resname[j])			
-					chain.append(self._chain[j])			
+					name.append(self._name[j])
+					loc.append(self._loc[j])
+					resname.append(self._resname[j])
+					chain.append(self._chain[j])
 					if(separate_resids == 'yes'):
-						resid.append(this_resid)		
+						resid.append(this_resid)
 					else:
-						resid.append(self._resid[j])			
-					original_resid.append(self._original_resid[j])	
-					rescode.append(self._rescode[j])	
-					occupancy.append(self._occupancy[j])			
-					beta.append(self._beta[j])	
-					#segname.append(self._segname[j])	
+						resid.append(self._resid[j])
+					original_resid.append(self._original_resid[j])
+					rescode.append(self._rescode[j])
+					occupancy.append(self._occupancy[j])
+					beta.append(self._beta[j])
+					#segname.append(self._segname[j])
 					segname.append(this_segment)
-					element.append(self._element[j])	
-					charge.append(self._charge[j])	
-					moltype.append(self._moltype[j])	
-					residue_flag.append(self._residue_flag[j])	
+					element.append(self._element[j])
+					charge.append(self._charge[j])
+					moltype.append(self._moltype[j])
+					residue_flag.append(self._residue_flag[j])
 
 					try:
 						atom_charge.append(self._atom_charge[j])
 					except:
 						pass
-					try:	
+					try:
 						atom_vdw.append(self._atom_vdw[j])
 					except:
 						pass
@@ -658,7 +665,7 @@ class Mask(object):
 
 				except:
 					error.append('failed in copy_molecule when attempting to assign descriptors to atom '+str(i))
-					sys.exit()	
+					sys.exit()
 					return error
 
 			axis_int = random.randint(1,3)
@@ -670,13 +677,13 @@ class Mask(object):
 				axis = 'z'
 
 			theta = 360.0*random.random()
-	
+
 			self.rotate(frame,axis,theta)
 
 			new_coor[0,natoms*i:(natoms*(i+1)),:] = self._coor[0,:,:]-self_com+com_coor[i]
 
 			self.rotate(frame,axis,-theta)
-				
+
 		other.setAtom(atom)
 		other.setIndex(numpy.array(index,numpy.int))
 		other.setOriginal_index(original_index)
@@ -699,7 +706,7 @@ class Mask(object):
 		other.setAtom_vdw(numpy.array(atom_vdw,numpy.float32))
 		other.setResidue_flag(residue_flag)
 
-		other.setConect(self.conect)
+		other.setConect(self.conect())
 
 		other._number_of_names = len(unique_names) ; other._names = unique_names
 		other._number_of_resnames = len(unique_resnames) ; other._resnames = unique_resnames
@@ -709,7 +716,7 @@ class Mask(object):
 		other._number_of_occupancies = len(unique_occupancies) ; other._occupancies = unique_occupancies
 		other._number_of_betas = len(unique_betas) ; other._betas = unique_betas
 		other._number_of_elements = len(unique_elements) ; other._elements = unique_elements
-	
+
 		return error
 
 
@@ -718,7 +725,7 @@ class Mask(object):
 		This method returns the internal indices for the supplied
 		mask.  
 		'''
-		
+
 		natoms=self.natoms()
 		indices=numpy.nonzero(mask*numpy.arange(1,natoms+1))[0]
 
@@ -747,11 +754,11 @@ class Mask(object):
 		error=[]
 		new_coor=[]
 		natoms=self.natoms()
-			
+
 		indicies=numpy.nonzero(mask*numpy.arange(1,natoms+1))[0]
 
 		this_frame_coor = self._coor[frame,:,:]
-		
+
 		coor=numpy.zeros((1,len(indicies),3),numpy.float32)
 
 		try:
@@ -803,15 +810,15 @@ class Mask(object):
         		this_index = indicies_self[i]*3
         		three_indicies_self.append([this_index,this_index+1,this_index+2])
 		three_indicies_self = numpy.array(three_indicies_self).flatten()
-	
+
 		coor = self.coor()[:,:,:]
 
 		try:
 			# TAKE COORDS FROM OTHER
-		
+
 #			c = numpy.take(other._coor[frame,:,:],three_indicies_other)
 #			c.shape = (-1,3)
-	
+
 			# PUT OTHER INTO SELF
 
 #			numpy.put(coor[frame],three_indicies_other,c)
@@ -826,7 +833,7 @@ class Mask(object):
 			return error
 
 		return error
-	
+
 	def set_descriptor_using_mask(self,mask,descriptor,value):
 		'''
 		This method writes the "value" to the given descriptor to
