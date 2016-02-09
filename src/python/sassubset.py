@@ -433,7 +433,7 @@ class Mask(object):
 		self._natoms = len(index)
 		self._original_index = original_index
 		self._original_resid = original_resid
-		#self._residue_flag = residue_flag
+		self._residue_flag = residue_flag
 
 		self._conect = mol1._conect
 		for ndx, list_ndxs in mol2._conect.iteritems():
