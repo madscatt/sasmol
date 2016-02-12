@@ -144,7 +144,7 @@ class Move():
 
 		'''
 
-     	 	cs=numpy.cos(theta) ; si=numpy.sin(theta)
+		cs=numpy.cos(theta) ; si=numpy.sin(theta)
 		if(axis=='x'):
 			mat=numpy.array([[1.0,0.0,0.0],[0.0,cs,-si],[0.0,si,cs]])
 		elif(axis=='y'):
@@ -159,13 +159,13 @@ class Move():
 	
 		return
 
-        def general_axis_rotate(self,frame,theta,ux,uy,uz):
-                '''
-                The general rotation of a molecule along an arbitrarily
+	def general_axis_rotate(self,frame,theta,ux,uy,uz):
+		'''
+        The general rotation of a molecule along an arbitrarily
 		given unit axis (ux,uy,uz) by an angle theta.
 
-                Note that calcuations are in radians
-                '''
+        Note that calcuations are in radians
+        '''
 
 		c11 = numpy.cos(theta)+pow(ux,2)*(1-numpy.cos(theta))
 		c12 = ux*uy*(1-numpy.cos(theta))-uz*numpy.sin(theta)
@@ -175,7 +175,7 @@ class Move():
 		c23 = uy*uz*(1-numpy.cos(theta))-ux*numpy.sin(theta)
 		c31 = uz*ux*(1-numpy.cos(theta))-uy*numpy.sin(theta)
 		c32 = uz*uy*(1-numpy.cos(theta))+ux*numpy.sin(theta)
-      		c33 = numpy.cos(theta)+pow(uz,2)*(1-numpy.cos(theta))
+		c33 = numpy.cos(theta)+pow(uz,2)*(1-numpy.cos(theta))
 
 		C = numpy.matrix([[c11,c12,c13],[c21,c22,c23],[c31,c32,c33]])
 
@@ -183,15 +183,15 @@ class Move():
 
 		self.coor()[frame,:] = coor
 
-                return
+		return
 
-        def euler_rotate(self,frame,phi,theta,psi):
-                '''
-                Rotate the molecule by a euler angle set (phi,theta,psi)
+	def euler_rotate(self,frame,phi,theta,psi):
+		'''
+        Rotate the molecule by a euler angle set (phi,theta,psi)
 
-                Note that calcuations are in radians
+        Note that calcuations are in radians
 
-                '''
+        '''
 
 		c11 = numpy.cos(theta)*numpy.cos(psi)
 		c12 = numpy.cos(phi)*numpy.sin(psi) + numpy.sin(phi)*numpy.sin(theta)*numpy.cos(psi)
@@ -211,37 +211,37 @@ class Move():
                 
 		return
 
-        def apply_biomt(self, frame, selection, U, M):
-        	"""
-			Apply transforms taken from biological unit transforms (BIOMT) to
-			the coordinates of the chosen selection and frame.
+	def apply_biomt(self, frame, selection, U, M):
+		"""
+		Apply transforms taken from biological unit transforms (BIOMT) to
+		the coordinates of the chosen selection and frame.
 
-			Information on BIOMT available at:
-			http://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/biological-assemblies
+		Information on BIOMT available at:
+		http://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/biological-assemblies
 
-			@type  frame:      integer
-			@param frame:      Frame number of coordinates to transform
-			@type  selection:  string
-			@param selection:  Selection string in standard SASSIE format
-			                   specifying the coordinates to be transformed
-			@type  U:          numpy.array
-			@param U:          3 x 3 rotation matrix
-			@type  M:          numpy.array
-			@param M:          3 x 1 translation vector
-			"""
+		@type  frame:      integer
+		@param frame:      Frame number of coordinates to transform
+		@type  selection:  string
+		@param selection:  Selection string in standard SASSIE format
+						   specifying the coordinates to be transformed
+		@type  U:          numpy.array
+		@param U:          3 x 3 rotation matrix
+		@type  M:          numpy.array
+		@param M:          3 x 1 translation vector
+		"""
 
-        	# Get the coordinates for just the chosen frame and selection
-        	# as a masked numpy array
-        	coords = self.coor()
-        	err, mask = self.get_subset_mask(selection)
-        	err, sel_coords = self.get_coor_using_mask(frame,mask)
+		# Get the coordinates for just the chosen frame and selection
+		# as a masked numpy array
+		coords = self.coor()
+		err, mask = self.get_subset_mask(selection)
+		err, sel_coords = self.get_coor_using_mask(frame,mask)
 
-        	# Transform coordinates
-        	new_coords = numpy.dot(U,sel_coords[frame].T).T
-        	new_coords = new_coords + M
+		# Transform coordinates
+		new_coords = numpy.dot(U,sel_coords[frame].T).T
+		new_coords = new_coords + M
 
-        	# Re-write edited coordinates into original array
-        	coords[frame] = new_coords
+		# Re-write edited coordinates into original array
+		coords[frame] = new_coords
 
-        	return
+		return
 
