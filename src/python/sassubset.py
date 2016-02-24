@@ -562,8 +562,10 @@ class Mask(object):
 		other._number_of_moltypes = len(unique_moltypes) ; other._moltypes = unique_moltypes
 
 		for oindex in original_index:
+
 			if oindex in self.conect():
-				conect[oindex] = self.conect[oindex]
+
+				conect[oindex] = self.conect()[oindex]
 
 		other.setConect(conect)
 
