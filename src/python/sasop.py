@@ -211,37 +211,3 @@ class Move():
                 
 		return
 
-	def apply_biomt(self, frame, selection, U, M):
-		"""
-		Apply transforms taken from biological unit transforms (BIOMT) to
-		the coordinates of the chosen selection and frame.
-
-		Information on BIOMT available at:
-		http://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/biological-assemblies
-
-		@type  frame:      integer
-		@param frame:      Frame number of coordinates to transform
-		@type  selection:  string
-		@param selection:  Selection string in standard SASSIE format
-						   specifying the coordinates to be transformed
-		@type  U:          numpy.array
-		@param U:          3 x 3 rotation matrix
-		@type  M:          numpy.array
-		@param M:          3 x 1 translation vector
-		"""
-
-		# Get the coordinates for just the chosen frame and selection
-		# as a masked numpy array
-		coords = self.coor()
-		err, mask = self.get_subset_mask(selection)
-		err, sel_coords = self.get_coor_using_mask(frame,mask)
-
-		# Transform coordinates
-		new_coords = numpy.dot(U,sel_coords[frame].T).T
-		new_coords = new_coords + M
-
-		# Re-write edited coordinates into original array
-		coords[frame] = new_coords
-
-		return
-
