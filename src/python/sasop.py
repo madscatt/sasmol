@@ -144,7 +144,7 @@ class Move():
 
 		'''
 
-     	 	cs=numpy.cos(theta) ; si=numpy.sin(theta)
+		cs=numpy.cos(theta) ; si=numpy.sin(theta)
 		if(axis=='x'):
 			mat=numpy.array([[1.0,0.0,0.0],[0.0,cs,-si],[0.0,si,cs]])
 		elif(axis=='y'):
@@ -159,13 +159,13 @@ class Move():
 	
 		return
 
-        def general_axis_rotate(self,frame,theta,ux,uy,uz):
-                '''
-                The general rotation of a molecule along an arbitrarily
+	def general_axis_rotate(self,frame,theta,ux,uy,uz):
+		'''
+        The general rotation of a molecule along an arbitrarily
 		given unit axis (ux,uy,uz) by an angle theta.
 
-                Note that calcuations are in radians
-                '''
+        Note that calcuations are in radians
+        '''
 
 		c11 = numpy.cos(theta)+pow(ux,2)*(1-numpy.cos(theta))
 		c12 = ux*uy*(1-numpy.cos(theta))-uz*numpy.sin(theta)
@@ -175,7 +175,7 @@ class Move():
 		c23 = uy*uz*(1-numpy.cos(theta))-ux*numpy.sin(theta)
 		c31 = uz*ux*(1-numpy.cos(theta))-uy*numpy.sin(theta)
 		c32 = uz*uy*(1-numpy.cos(theta))+ux*numpy.sin(theta)
-      		c33 = numpy.cos(theta)+pow(uz,2)*(1-numpy.cos(theta))
+		c33 = numpy.cos(theta)+pow(uz,2)*(1-numpy.cos(theta))
 
 		C = numpy.matrix([[c11,c12,c13],[c21,c22,c23],[c31,c32,c33]])
 
@@ -183,15 +183,15 @@ class Move():
 
 		self.coor()[frame,:] = coor
 
-                return
+		return
 
-        def euler_rotate(self,frame,phi,theta,psi):
-                '''
-                Rotate the molecule by a euler angle set (phi,theta,psi)
+	def euler_rotate(self,frame,phi,theta,psi):
+		'''
+        Rotate the molecule by a euler angle set (phi,theta,psi)
 
-                Note that calcuations are in radians
+        Note that calcuations are in radians
 
-                '''
+        '''
 
 		c11 = numpy.cos(theta)*numpy.cos(psi)
 		c12 = numpy.cos(phi)*numpy.sin(psi) + numpy.sin(phi)*numpy.sin(theta)*numpy.cos(psi)

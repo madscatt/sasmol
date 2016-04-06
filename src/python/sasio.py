@@ -480,18 +480,33 @@ class Files(object):
                 print 'element = ',self._element[i],' : type = ',type(self._element[i])
                 print 'charge = ',self._charge[i],' : type = ',type(self._charge[i])
 
-        if 'model' in kwargs:
-            infile.write("ENDMDL\n")
+        # TODO: Check with Joseph to see if logic acceptable -
+        # i.e. is 'final' always accompanied by 'model'?
+        if ('final' in kwargs) or ('model' not in kwargs):
+
+            if conect:
+                conect_lines = self.create_conect_pdb_lines()
+                for line in conect_lines:
+                    infile.write(line + '\n')
+
+            infile.write("END\n")
+
         else:
-            infile.write("END\n")
 
-        if 'final' in kwargs:
-            infile.write("END\n")
+            infile.write("ENDMDL\n")
 
-        if conect:
-            conect_lines = self.create_conect_pdb_lines()
-            for line in conect_lines:
-                infile.write(line + '\n')
+        # if 'model' in kwargs:
+        #     infile.write("ENDMDL\n")
+        # else:
+        #     if conect:
+        #         conect_lines = self.create_conect_pdb_lines()
+        #         for line in conect_lines:
+        #             infile.write(line + '\n')
+        #
+        #     infile.write("END\n")
+        #
+        # if 'final' in kwargs:
+        #     infile.write("END\n")
 
         infile.close()
     
