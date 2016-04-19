@@ -186,13 +186,13 @@ class Test_unit_sasio_Files_get_elements(MockerTestCase):
       test for periodic table heavy atoms
       '''
       #
-      datafile = DataPath+'Otheratoms.txt'
+      datafile = DataPath+'Otheratoms_2.txt'
       resname = 'RES'
       for atom in open(datafile).readlines():
          name = atom.strip()
          realname = name
          (error, element_name) = self.o.get_element(name,resname)
-         print error, element_name
+         print error, element_name,realname
          self.assertEqual(len(error),0)
          self.assertEqual(element_name,realname)
 
