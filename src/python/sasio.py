@@ -938,13 +938,14 @@ class Files(object):
 
         error = []
 
+        self._header = header
+        self._conect = conect
+
         if 'saspdbrx_topology' in kwargs:
             if kwargs['saspdbrx_topology']:	
                 error = self.check_charmm_atomic_order_reorganize()
                 return error
 
-        self._header = header
-        self._conect = conect
 
         return 
 

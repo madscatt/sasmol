@@ -69,6 +69,7 @@ class SasAtm(sasio.Files,sascalc.Prop,sasop.Move,sassubset.Mask,sasproperties.At
         self._mass=None
         self._coor=None
         self._com=None
+        self._conect={}
 
     def setId(self,newValue):
         self._id = newValue
