@@ -1,0 +1,18 @@
+07-18-14
+
+NOTE
+current installation and running was only tested on Mavericks (OSX 10.9.1), but it is expected to work on any UNIX/LINUX-based machines
+
+DEPENDENCIES
+you only need to install gcc with c++11 support
+
+DIRECTORY LAYOUT
+./src: source codes (.cpp files)
+./include: header files (.h files)
+./test: testing directory where the executable will be generated; data also stays here
+
+COMPILING AND RUNNING INSTRUCTIONS
+(1) At the current directory, type:
+make
+(2) Go to the "test" directory, type:
+./a.out
