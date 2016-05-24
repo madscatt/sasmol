@@ -113,8 +113,11 @@ https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
 # config:
 
 git config --list
+
 git config --global user.name "Joseph E. Curtis"
+
 git config --global user.email "madscatt@gmail.com"
+
 git config --global core.editor "vi"
 
 (jc@hal)git_working_copies/sasmol% cat ~/.gitignore_global 
@@ -144,6 +147,8 @@ git clone https://github.com/madscatt/sasmol.git
 
 
 git checkout -b add_cpp_section
+
+git push origin sasmol add_cpp_section
 
 ... do stuff ...
 
