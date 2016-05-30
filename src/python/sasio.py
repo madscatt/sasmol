@@ -861,7 +861,12 @@ class Files(object):
                 if(true_index == num_atoms):				
                     if(printme): print 'finished reading frame = ',this_frame
                     index=numpy.array(index,numpy.int)
-                    original_index=numpy.array(original_index,numpy.int)
+
+                    try:
+                        original_index=numpy.array(original_index,numpy.int)
+                    except:
+                        original_index = None
+
                     resid=numpy.array(resid,numpy.int)
                     original_resid=numpy.array(original_resid,numpy.int)
 
