@@ -2,7 +2,7 @@
 contract
 
 make sure the keys are unique
-make sure the right amu list was generated
+make sure the right element list was generated
 '''
 
 from unittest import main 
@@ -15,11 +15,11 @@ import os
 DataPath = os.path.dirname(os.path.realpath(__file__))+'/../data/sasmol/sasproperties/'
 
 
-class Test_unit_sasproperties_Atomic_amino_acid_sld(MockerTestCase):
+class Test_unit_sasproperties_Atomic_element_sl(MockerTestCase):
 
    def setUp(self):
       self.o=sasmol.SasMol(0)
-      self.amino_acid_sld  = self.o.amino_acid_sld()
+      self.element_sl  = self.o.element_sl()
 
 
    def unique(self,seq):
@@ -36,23 +36,28 @@ class Test_unit_sasproperties_Atomic_amino_acid_sld(MockerTestCase):
       make sure the keys are unique
       '''
       #
-      amino_acid_sld_unique = self.unique(self.amino_acid_sld.keys())
-      self.assertEqual(self.amino_acid_sld.keys(), amino_acid_sld_unique)
+      element_sl_unique = self.unique(self.element_sl.keys())
+      self.assertEqual(self.element_sl.keys(), element_sl_unique)
 
 
    def test_all(self):
       '''
-      make sure the right amino_acid_sld list was generated
+      make sure the right element_sl list was generated
       '''
       #
-      datafile = DataPath+'amino_acid_sld.txt'
+      datafile = DataPath+'element_sl.txt'
       fp = open(datafile,'r')
       ele = {}
       for line in fp.readlines():
-         aa = line[0:3]
+         atomic_scattering = line.split()
+#         print atomic_scattering       
+         aa = atomic_scattering[0]
+#         print aa
          value = eval(line[4:])
+#         print value
          ele[aa]=value
-      self.assertEqual(ele,self.amino_acid_sld)
+#         print ele
+      self.assertEqual(ele,self.element_sl)
 
    def tearDown(self):
       pass

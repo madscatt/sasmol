@@ -758,7 +758,16 @@ class Files(object):
             if((record_name == 'ATOM' or record_name == 'HETATM') and this_frame == 1):
                 true_index += 1
                 atom.append(string.strip(lin[0:6]))		#	1-6		record name	
-                original_index.append(lin[6:11])				#	7-11		atom serial number
+
+                try:
+                    this_index = locale.atoi(lin[6:11]) 				#	7-11		atom serial number
+                    original_index.append(this_index)				    #	7-11		atom serial number
+                except:
+                    this_index = int(lin[6:11],16)				        #   7-11		atom serial number
+                    original_index.append(this_index)                   #   7-11        atom serial number
+                #finally:
+                #    original_index.append(lin[6:11])
+
                 index.append(str(true_index))   	        #   set index so that > 99,999 atoms can be read and counted
                 this_name = string.strip(lin[12:16])		#	13-16		atom name
                 name.append(string.strip(lin[12:16]))		#	13-16		atom name
@@ -770,9 +779,20 @@ class Files(object):
                 resname.append(string.strip(lin[17:21]))	#	18-20		residue name
                 this_chain = lin[21]				#	22		chain identifier
                 chain.append(lin[21])				#	22		chain identifier
-                this_resid = locale.atoi(lin[22:26])			#	23-26		residue sequence number
-                original_resid.append(lin[22:26])			#	23-26		residue sequence number
-                resid.append(lin[22:26])			#	23-26		residue sequence number
+            
+                try:
+                    this_resid = locale.atoi(lin[22:26])			#	23-26		residue sequence number
+                    original_resid.append(this_resid)               #	23-26		residue sequence number
+                except:
+                    this_resid = int(lin[22:66],16) 
+                    original_resid.append(this_resid)               #	23-26		residue sequence number
+                #finally:
+                #    original_index.append(lin[22:26])
+
+                #resid.append(lin[22:26])			#	23-26		residue sequence number
+                resid.append(this_resid)            #	23-26		residue sequence number
+
+
                 rescode.append(lin[26])				#	27		code for insertion of residues
                 x.append(lin[30:38])				#	31-38		Real(8.3) X: angstroms	
                 y.append(lin[38:46])				#	39-46		Real(8.3) Y: angstroms	
