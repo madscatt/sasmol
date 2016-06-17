@@ -708,7 +708,7 @@ class Files(object):
             except:
                 pass
 			#
-            if((record_name == 'ATOM' or record_name == 'HETATM')):
+            if((record_name[:4] == 'ATOM' or record_name == 'HETATM')):
                 count_index += 1
                 num_counts_this_model += 1
                 num_counts_this_end += 1
@@ -755,7 +755,7 @@ class Files(object):
 
             record_name = string.strip(lin[0:6])
 
-            if((record_name == 'ATOM' or record_name == 'HETATM') and this_frame == 1):
+            if((record_name[:4] == 'ATOM' or record_name == 'HETATM') and this_frame == 1):
                 true_index += 1
                 atom.append(string.strip(lin[0:6]))		#	1-6		record name	
 
@@ -910,10 +910,10 @@ class Files(object):
                             break
 
                     this_frame += 1
-            elif((record_name != 'ATOM' or record_name != 'HETATM' and record_name != 'CONECT') and this_frame == 1):
+            elif((record_name[:4] != 'ATOM' or record_name != 'HETATM' and record_name != 'CONECT') and this_frame == 1):
                 header.append(lin)
 	
-            elif((record_name == 'ATOM' or record_name == 'HETATM') and this_frame > 1):
+            elif((record_name[:4] == 'ATOM' or record_name == 'HETATM') and this_frame > 1):
                 true_index += 1
                 x.append(lin[30:38])				#	31-38		Real(8.3) X: angstroms	
                 y.append(lin[38:46])				#	39-46		Real(8.3) Y: angstroms	
