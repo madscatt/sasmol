@@ -652,6 +652,8 @@ class Files(object):
 	
         infile=open(filename,'r').readlines()
 
+        self.setFilename(filename)
+
         if(printme): print 'reading filename: ',filename
 		
         atom=[] ; index=[] ; original_index=[] ; name=[] ; loc=[] ; resname=[] ; chain=[] ; resid=[] ; rescode=[]
