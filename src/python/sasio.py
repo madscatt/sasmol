@@ -440,7 +440,7 @@ class Files(object):
 			
             this_index = self._index[i]
 	
-            this_resid = self._resid[i]
+            this_resid = int(self._resid[i])
 
             if(this_index > 99999):
                 this_index = '99999'
