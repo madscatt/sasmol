@@ -140,7 +140,9 @@ class Move():
 		'''
 		Simple rotation about the x, y, or z axis.
 		
+                right-handed rotation 
 		Note that calcuations are in radians
+		Rotation is done in right-handed coordinate system
 
 		'''
 
@@ -165,8 +167,14 @@ class Move():
 		given unit axis (ux,uy,uz) by an angle theta.
 
         Note that calcuations are in radians
+
+        Original formulas are for a left-handed coordinate system
+        therefore for a right-handed rotation change theta to negative
+        theta. NOTE: ux, uy, uz MUST compose a unit vector (no check is done)
+
         '''
 
+		theta = -1.0 * theta
 		c11 = numpy.cos(theta)+pow(ux,2)*(1-numpy.cos(theta))
 		c12 = ux*uy*(1-numpy.cos(theta))-uz*numpy.sin(theta)
 		c13 = ux*uz*(1-numpy.cos(theta))+uy*numpy.sin(theta)

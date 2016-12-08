@@ -9,7 +9,7 @@ cf2py	intent(in) :: coor1,coor2,cut
 cf2py	intent(out):: check
 cf2py	intent(hide)::natoms1,natoms2
 cf2py	intent(hide)::x1,y1,z1,x2,y2,z2,diff2,dist
-
+        check = 0
         do 200,i=1,natoms1
            x1=coor1(i,1)
            y1=coor1(i,2)
