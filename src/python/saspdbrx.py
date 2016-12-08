@@ -1,5 +1,5 @@
 '''
-    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D. 
+    SASSIE: Copyright (C) 2011 Joseph E. Curtis, Ph.D.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,8 @@ pprint.pprint(o.topology_info['NTER'],width=100)
  'DELE': [['ATOM', 'HN']],
  'DONO': ['HT1', 'N', 'HT2', 'N', 'HT3', 'N'],
  'IC': [['HT1', 'N', 'CA', 'C', '0.0000', '0.0000', '180.0000', '0.0000', '0.0000'],
-        ['HT2', 'CA', '*N', 'HT1', '0.0000', '0.0000', '120.0000', '0.0000', '0.0000'],
+        ['HT2', 'CA', '*N', 'HT1', '0.0000',
+            '0.0000', '120.0000', '0.0000', '0.0000'],
         ['HT3', 'CA', '*N', 'HT2', '0.0000', '0.0000', '120.0000', '0.0000', '0.0000']],
  'TOTAL_CHARGE': '1.00'}
 
@@ -64,14 +65,22 @@ pprint.pprint(o.topology_info['ALA'],width=100)
  'DONO': ['HN', 'N'],
  'DOUB': [['O', 'C']],
  'IC': [['-C', 'CA', '*N', 'HN', '1.3551', '126.4900', '180.0000', '115.4200', '0.9996'],
-        ['-C', 'N', 'CA', 'C', '1.3551', '126.4900', '180.0000', '114.4400', '1.5390'],
-        ['N', 'CA', 'C', '+N', '1.4592', '114.4400', '180.0000', '116.8400', '1.3558'],
-        ['+N', 'CA', '*C', 'O', '1.3558', '116.8400', '180.0000', '122.5200', '1.2297'],
-        ['CA', 'C', '+N', '+CA', '1.5390', '116.8400', '180.0000', '126.7700', '1.4613'],
-        ['N', 'C', '*CA', 'CB', '1.4592', '114.4400', '123.2300', '111.0900', '1.5461'],
-        ['N', 'C', '*CA', 'HA', '1.4592', '114.4400', '-120.4500', '106.3900', '1.0840'],
-        ['C', 'CA', 'CB', 'HB1', '1.5390', '111.0900', '177.2500', '109.6000', '1.1109'],
-        ['HB1', 'CA', '*CB', 'HB2', '1.1109', '109.6000', '119.1300', '111.0500', '1.1119'],
+        ['-C', 'N', 'CA', 'C', '1.3551', '126.4900',
+            '180.0000', '114.4400', '1.5390'],
+        ['N', 'CA', 'C', '+N', '1.4592', '114.4400',
+            '180.0000', '116.8400', '1.3558'],
+        ['+N', 'CA', '*C', 'O', '1.3558', '116.8400',
+            '180.0000', '122.5200', '1.2297'],
+        ['CA', 'C', '+N', '+CA', '1.5390', '116.8400',
+            '180.0000', '126.7700', '1.4613'],
+        ['N', 'C', '*CA', 'CB', '1.4592', '114.4400',
+            '123.2300', '111.0900', '1.5461'],
+        ['N', 'C', '*CA', 'HA', '1.4592', '114.4400',
+            '-120.4500', '106.3900', '1.0840'],
+        ['C', 'CA', 'CB', 'HB1', '1.5390', '111.0900',
+            '177.2500', '109.6000', '1.1109'],
+        ['HB1', 'CA', '*CB', 'HB2', '1.1109', '109.6000',
+            '119.1300', '111.0500', '1.1119'],
         ['HB1', 'CA', '*CB', 'HB3', '1.1109', '109.6000', '-119.5800', '111.6100', '1.1114']],
  'IMPR': [['N', '-C', 'CA', 'HN'], ['C', 'CA', '+N', 'O']],
 """
@@ -444,7 +453,7 @@ class Topology(object):
                 #
                 # if self.charmm_residue_atoms[child_resname] == child_names:
                 #	continue
-                #import pprint
+                # import pprint
                 # pprint.pprint(child_resname)
                 # pprint.pprint(self.charmm_residue_atoms[child_resname],width=100)
                 new_indices = []
@@ -458,7 +467,7 @@ class Topology(object):
                     # if child_indices[i]!=new_indices[i]:
                     self.atom()[child_indices[i] -
                                 1] = child.atom()[new_indices[i]]
-                    #self.index()[indices[i]-1] = child.index[new_indices[i]]
+                    # self.index()[indices[i]-1] = child.index[new_indices[i]]
                     self.name()[child_indices[i] -
                                 1] = child.name()[new_indices[i]]
                     self.loc()[child_indices[i] -
@@ -486,20 +495,24 @@ class Topology(object):
                                    1] = child.coor()[0][new_indices[i]]
         return error
 
+##### BEGIN ADDITIONS FROM ZAZMOL
+##### BEGIN ADDITIONS FROM ZAZMOL
+##### BEGIN ADDITIONS FROM ZAZMOL
+
     def renumber(self, **kwargs):
         '''
         Method to renumber index and resid fields
 
         Parameters
         ----------
-        kwargs 
+        kwargs
         index :
         resid :
 
         Returns
         -------
         None
-        updated system object 
+        updated system object
         index
         resid
 
@@ -514,7 +527,7 @@ class Topology(object):
         1
 
         default renumber() with no arguments renumbers
-        both index and resid starting at 1 
+        both index and resid starting at 1
 
         >>> molecule.renumber()
         >>> molecule.index()[0]
@@ -589,10 +602,8 @@ class Topology(object):
 
         return
 
-
-
     def make_constraint_pdb(self, filename, basis_type, **kwargs):
-        ''' 
+        '''
      
         Method to rename attribute fields and assign values
         of 1.00 for the given basis type.
@@ -604,9 +615,9 @@ class Topology(object):
 
         Parameters
         ----------
-        filename    string : name of output PDB file to write 
+        filename    string : name of output PDB file to write
              
-        basis types: 
+        basis types:
 
             'heavy : all atoms except hydrogen
           
@@ -620,7 +631,7 @@ class Topology(object):
             'solute'    : all protein and nucleic
 
 
-        kwargs 
+        kwargs
             optional arguments
                 
                 field='beta' : write 1.00 to beta field
@@ -710,23 +721,23 @@ class Topology(object):
         elif field == 'occupancy':
             descriptor = self._occupancy
 
-        error = self.set_descriptor_using_mask(mask, descriptor, '1.00') 
+        error = self.set_descriptor_using_mask(mask, descriptor, '1.00')
         
         if len(error) > 0:
             print('error = ', error)
             return
                
-        if field == 'beta': 
+        if field == 'beta':
             self._beta = descriptor
-        elif field == 'occupancy': 
+        elif field == 'occupancy':
             self._occupancy = descriptor
 
-        self.write_pdb(filename,0,'w')
+        self.write_pdb(filename, 0, 'w')
 
         return
 
-def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
-        
+
+    def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
         """
         Method to write a PDB file of one atom per residue
         based on input FASTA sequence
@@ -735,19 +746,19 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
 
         Parameters
         ----------
-        filename    string : name of output PDB file to write 
+        filename    string : name of output PDB file to write
         
         moltype string
-                -> 'protein' ; fasta sequence of a protein 
-                -> 'nucleic' ; fasta sequence of a nucleic acid 
+                -> 'protein' ; fasta sequence of a protein
+                -> 'nucleic' ; fasta sequence of a nucleic acid
              
-        kwargs 
+        kwargs
             optional future arguments
                                                                                      
         Returns
         -------
         self._fasta
-            sets the fasta attribute in a system object 
+            sets the fasta attribute in a system object
 
         Examples
         -------
@@ -756,10 +767,9 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
         >>> molecule = system.Molecule("hiv1_gag.pdb")
         >>> molecule.create_fasta()
         >>> molecule.fasta()[:5]
-        ['G', 'A', 'R', 'A', 'S'] 
+        ['G', 'A', 'R', 'A', 'S']
 
         >>> molecule.make_backbone_pdb_from_fasta('sequence.pdb', 'protein')
-
 
         Note
         ____
@@ -770,17 +780,17 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
        
         N-terminal patches for proteins (GLYP, PROP) are accommodated
         
-        All coordinate values are set to 0.000 
+        All coordinate values are set to 0.000
          
         """
 
         if moltype == "protein":
-            residue_dictionary = self.one_to_three_letter_protein_residue_dictionary            
-            sequence_name = "CA" 
+            residue_dictionary = self.one_to_three_letter_protein_residue_dictionary
+            sequence_name = "CA"
 
         elif moltype == "nucleic":
-            residue_dictionary = self.one_to_three_letter_nucleic_residue_dictionary 
-            sequence_name = "O5'" 
+            residue_dictionary = self.one_to_three_letter_nucleic_residue_dictionary
+            sequence_name = "O5'"
 
         sequence = []
         first_flag = True
@@ -792,7 +802,7 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
                     sequence.append('GLYP')
                 elif residue == 'P' and first_flag:
                     sequence.append('PROP')
-                else:     
+                else:
                     sequence.append(residue_dictionary[residue])
 
             elif moltype == "nucleic":
@@ -800,16 +810,17 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
         
             first_flag = False
 
-        import sasmol.system as system
+        #import sasmol.system as system
+        import sasmol.sasmol as sasmol
          
-        molecule = system.Molecule_Maker(len(sequence), name=sequence_name)
+        #molecule = system.Molecule_Maker(len(sequence), name=sequence_name)
+        molecule = sasmol.Molecule_Maker(len(sequence), name=sequence_name)
 
         molecule._resname = sequence
 
         molecule.write_pdb(filename, 0, 'w')
 
         return
-
 
     def create_fasta(self, **kwargs):
         """
@@ -1078,8 +1089,9 @@ def make_backbone_pdb_from_fasta(self, filename, moltype, **kwargs):
 
         return
 
-
-
+##### END ADDITIONS FROM ZAZMOL
+##### END ADDITIONS FROM ZAZMOL
+##### END ADDITIONS FROM ZAZMOL
 
 
 
