@@ -668,3 +668,58 @@ class SasSys():
 
         print 'objectarray = ',self._objectarray
 
+
+
+class Molecule_Maker(SasAtm):
+    """
+        This class is used to define the minimum number of fields required to 
+        use within sasmol to use read_pdb() and write_pdb() methods in file_io.
+
+        Default inputs are listed in the variables in __init__ and itemized below.
+        The values are assigned to all atoms in the molecule.
+
+        Once defined, attributes can be set using setters in the Atom class.
+
+        Class has several initialization options
+
+    """
+
+    def __init__(self, natoms, atom='ATOM', index=None, name='C', loc=' ',
+        resname='DUM', chain='A', resid=None, rescode=' ', coor=None,
+        occupancy='0.00', beta='0.00', segname='DUM', element='C', charge=' ', **kwargs):
+
+        SasAtm.__init__(self)
+
+        self._atom = [atom for x in xrange(natoms)]
+        
+        if index is not None:
+            self._index = index
+        else:
+            self._index = numpy.array([x+1 for x in xrange(natoms)],numpy.int)
+        
+        self._name = [name for x in xrange(natoms)]
+        self._loc = [loc for x in xrange(natoms)]
+        self._resname = [resname for x in xrange(natoms)]
+        self._chain = [chain for x in xrange(natoms)]
+
+        if resid is not None:
+            self._resid = resid
+        else:
+            self._resid = numpy.array([x+1 for x in xrange(natoms)],numpy.int)
+
+        self._rescode = [rescode for x in xrange(natoms)]
+        
+        if coor is not None:
+            self._coor = coor
+        else:
+            self._coor = numpy.zeros((1,natoms,3),numpy.float)
+        
+        self._occupancy = [occupancy for x in xrange(natoms)]
+        self._beta = [beta for x in xrange(natoms)]
+        self._charge = [charge for x in xrange(natoms)]
+        self._segname = [segname for x in xrange(natoms)]
+        self._element = [element for x in xrange(natoms)]
+
+
+
+
