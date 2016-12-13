@@ -102,7 +102,7 @@ setup(name='sasmol',
         ( os.path.join('sasmol','test_sasmol','data','sasmol','sasproperties') , [os.path.join('src','python','test_sasmol','data','sasmol','sasproperties','Satoms.txt')]),
         ( os.path.join('sasmol','test_sasmol','data','sasmol','sasproperties') , [os.path.join('src','python','test_sasmol','data','sasmol','sasproperties','amino_acid_sld.txt')]),
         ( os.path.join('sasmol','test_sasmol','data','sasmol','sasproperties') , [os.path.join('src','python','test_sasmol','data','sasmol','sasproperties','charmm27_atoms.txt')]),
-        ( os.path.join('sasmol','test_sasmol','data','sasmol','sasproperties') , [os.path.join('src','python','test_sasmol','data','sasmol','sasproperties','standard_atomic_weigh.txt')]),
+        ( os.path.join('sasmol','test_sasmol','data','sasmol','sasproperties') , [os.path.join('src','python','test_sasmol','data','sasmol','sasproperties','standard_atomic_weight.txt')]),
    
         ( os.path.join('sasmol','test_sasmol','data','sasmol','sasop') , [os.path.join('src','python','test_sasmol','data','sasmol','sasop','1CRN-rot-shift.pdb')]),
         ( os.path.join('sasmol','test_sasmol','data','sasmol','sasop') , [os.path.join('src','python','test_sasmol','data','sasmol','sasop','1CRN-rot-sub.pdb')]),

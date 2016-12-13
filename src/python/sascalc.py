@@ -209,18 +209,13 @@ have their natural abundance weight. These elements are located
             nak3 = numpy.array([ak[0][2], ak[1][2], ak[2][2]])
 
             ak = numpy.array([nak1, nak2, nak3])
+            ''' make sure det(ak) is positive 1 '''
+            if numpy.linalg.det([ak]) < 0:
+                ak[0] = -1.0 * ak[0]
 
         sasop.Move.moveto(self, frame, com)
 
         return uk, ak, I
-
-# uk =  [  1.30834716e+07   1.91993314e+08   1.85015201e+08]
-# ak =  [[-0.08711655 -0.97104917  0.22242802]
-# [-0.512547    0.23514759  0.82583363]
-# [ 0.85422847  0.04206103  0.51819358]]
-# I =  [[  1.90290278e+08  -9.27036143e+06   1.25097100e+07]
-# [ -9.27036143e+06   1.40233826e+08   7.53462714e+07]
-# [  1.25097100e+07   7.53462714e+07   5.95678835e+07]]
 
     def calcminmax(self):
         '''	
