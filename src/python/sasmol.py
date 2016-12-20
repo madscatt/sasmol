@@ -22,6 +22,7 @@ import sassubset
 import sasproperties
 import saspdbrx
 import sasview
+import numpy
 
 #	SASMOL
 #

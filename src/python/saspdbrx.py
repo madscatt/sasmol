@@ -21,6 +21,7 @@
 #	 1         2         3         4         5         6         7
 # LC4567890123456789012345678901234567890123456789012345678901234567890123456789
 #								       *      **
+import sasmol as sasmol
 
 """
 The topolgy dictionary looks like the following:
@@ -90,13 +91,15 @@ import numpy
 import copy
 import sasconfig as sasconfig
 
-
 class Topology(object):
 
     '''
     This class contains charmm topolgy information used other modules.
     '''
     
+    def __init__(self):
+        pass
+
     def add(self, dictionary, key, value):
         '''
         This method is only used by read_topolgy method
@@ -811,9 +814,9 @@ class Topology(object):
             first_flag = False
 
         #import sasmol.system as system
-        import sasmol.sasmol as sasmol
-         
         #molecule = system.Molecule_Maker(len(sequence), name=sequence_name)
+
+        #import sasmol.sasmol as sasmol
         molecule = sasmol.Molecule_Maker(len(sequence), name=sequence_name)
 
         molecule._resname = sequence
