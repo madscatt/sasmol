@@ -281,6 +281,86 @@ def parse_sequence(sym2elt):
             t.error("empty sequence")
         return seq
 
+def parse_fasta(fasta_sequence, **kwargs):
+	"""
+	method to convert fasta_sequence object to list of strings
+	for each valid sequence in the initial object
+
+	format is based on the NCBI fasta format convention
+	https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=BlastHelp
+
+	notes:
+
+	Parameters
+	----------
+	fasta_sequence
+		list with formatted fasta input
+
+	kwargs
+		optional future arguments
+
+	Returns
+	-------
+	all_sequences
+
+		a list containing sequences without comments, spaces, carriage returns, numbers,
+		or termination flags.
+
+		or
+
+		an error indicating an empty line in the file
+
+	Examples
+	-------
+
+	>>> import sasmol.sasutil as sasutil
+	>>> fasta_sequence = open('test_fasta.txt', 'r').readlines()
+	>>> all_sequences = sasutil.parse_fasta(fasta_sequence)
+	>>> print(all_sequences)
+
+	Note
+	----
+		1) lines beginning with > or ; are treated as comments and passed
+		2) spaces are ignored
+		3) * are ignored (should be a termination)
+		4) numbers are ignored so you can have numbering at the beginning of a line
+		5) \n are processed
+		6) comment lines are NOT required in the input
+		7) comment lines cause a new sequence to be started
+
+	"""
+
+	all_sequences = []
+	for line in fasta_sequence:
+		# check if line is empty
+		if line.strip() == '':
+			error = 'ERROR: empty lines in fasta sequence are not allowed'
+			print(error)
+			return error
+		# check if first character is the comment identifier
+		elif line[0] == '>' or line[0] == ';':
+			# try to add completed sequence to full list (if it exists)
+			try:
+				if new_sequence != '':
+					all_sequences.append(new_sequence)
+			except:
+				pass
+			new_sequence = ''
+		else:
+			for char in line:
+				if not char.isspace() and char != '*' and not char.isdigit():
+					try:
+						new_sequence += char
+					except:
+						new_sequence = char
+
+	if new_sequence != '':
+		all_sequences.append(new_sequence)
+
+	return all_sequences
+
+
+
 #def get_chemical_formula(formula_string):
 #
 #    Atomic = sasproperties.Atomic()

@@ -24,7 +24,7 @@
 import sasmol as sasmol
 
 """
-The topolgy dictionary looks like the following:
+The topology dictionary looks like the following:
 
 pprint.pprint(o.topology_info['NTER'],width=100)
 {'ATOM': [['N', 'NH3', '-0.30'],
@@ -1095,9 +1095,6 @@ class Topology(object):
 ##### END ADDITIONS FROM ZAZMOL
 ##### END ADDITIONS FROM ZAZMOL
 ##### END ADDITIONS FROM ZAZMOL
-
-
-
 
 
 def set_pdb_values(m, natoms, **kwargs):

@@ -522,7 +522,7 @@ class SasAtm(sasio.Files,sascalc.Prop,sasop.Move,sassubset.Mask,sasproperties.At
 	
     def setFasta(self,newValue):
         self._fasta = newValue
-
+    
     def one_letter_resname(self):
         return self._one_letter_resname
 	
