@@ -781,8 +781,6 @@ class Topology(object):
         Protein PDB files are written with one "CA" atom per residue
         Nucleic acid PDF files are written with on "O5'" atom per residue
        
-        N-terminal patches for proteins (GLYP, PROP) are accommodated
-        
         All coordinate values are set to 0.000
          
         """
@@ -802,9 +800,11 @@ class Topology(object):
 
             if moltype == "protein":
                 if residue == 'G' and first_flag:
-                    sequence.append('GLYP')
+                    #sequence.append('GLYP')
+                    sequence.append('GLY')
                 elif residue == 'P' and first_flag:
-                    sequence.append('PROP')
+                    #sequence.append('PROP')
+                    sequence.append('PRO')
                 else:
                     sequence.append(residue_dictionary[residue])
 
