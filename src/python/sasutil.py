@@ -26,7 +26,7 @@
 	SasUtil holds general methods for file naming, os differences,
         chemical formula parsing, etc.
 '''
-#import sasmol.sasproperties as sasproperties
+import sasproperties as sasproperties
 import string
    
 
@@ -361,36 +361,36 @@ def parse_fasta(fasta_sequence, **kwargs):
 
 
 
-#def get_chemical_formula(formula_string):
-#
-#    Atomic = sasproperties.Atomic()
-#    #standard_atomic_weights = Atomic.amu(keep_lower_case=True) 
-#    amu = Atomic.amu(keep_lower_case=True) 
-#    sym2elt = build_dict(_data)
-#
-#    #sym2elt = amu
-#
-#    formula_dictionary = {}
-#
+def get_chemical_formula(formula_string):
+
+    Atomic = sasproperties.Atomic()
+    #standard_atomic_weights = Atomic.amu(keep_lower_case=True) 
+    amu = Atomic.amu(keep_lower_case=True) 
+    sym2elt = build_dict(_data)
+
+    #sym2elt = amu
+
+    formula_dictionary = {}
+
 #    #print amu
-#
-#    error = []
-#
-#    try:
-#        seq = parse(formula_string.strip(" "),sym2elt)
-#        #seq.displaysyms(sym2elt)
-#        seq.addsyms(1,formula_dictionary)
-#        items = formula_dictionary.items()
-#        items.sort()
-#
-#        #for sym, count in items:
-#        #    print sym," :: ",count
-#
-#    except ValueError, detail:
-#        print str(detail)
-#        error.append(detail)
-#
-#    return error,formula_dictionary
+
+    error = []
+
+    try:
+        seq = parse(formula_string.strip(" "),sym2elt)
+        #seq.displaysyms(sym2elt)
+        seq.addsyms(1,formula_dictionary)
+        items = formula_dictionary.items()
+        items.sort()
+
+        #for sym, count in items:
+        #    print sym," :: ",count
+
+    except ValueError, detail:
+        print str(detail)
+        error.append(detail)
+
+    return error,formula_dictionary
 
 
 if __name__ == "__main__":
