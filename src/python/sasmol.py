@@ -313,6 +313,12 @@ class SasAtm(sasio.Files,sascalc.Prop,sasop.Move,sassubset.Mask,sasproperties.At
     def setPmi(self,newValue):
         self._pmi = newValue
 
+    def pdbname(self):
+        return self._pdbname
+
+    def setPdbname(self,newValue):
+        self._pdbname = newValue
+
     def minimum(self):
         return self._minimum
 
