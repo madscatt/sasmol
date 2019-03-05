@@ -85,3 +85,7 @@ if '-hugetest' in sys.argv:
 else:
    hugetest = False
 """
+
+
+if __name__ == "__main__":
+    print determine_float_type()

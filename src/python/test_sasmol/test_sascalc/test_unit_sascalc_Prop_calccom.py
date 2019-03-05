@@ -43,7 +43,8 @@ class Test_sascalc_Prop_calccom(MockerTestCase):
 
     def test_null(self):
         self.o.setElement([])
-        self.o.setCoor(numpy.zeros((1.0, 0.0, 3.0),floattype))
+        #self.o.setCoor(numpy.zeros([1.0, 0.0, 3.0],floattype))
+        self.o.setCoor(numpy.array([[[0.0, 0.0, 0.0]]],floattype))
         self.o.setTotalmass(0.0)
         result_com  = self.o.calccom(0)
         expected_com = [util.NAN, util.NAN, util.NAN]

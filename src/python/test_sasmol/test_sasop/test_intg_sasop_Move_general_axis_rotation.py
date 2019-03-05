@@ -68,7 +68,6 @@ class Test_intg_sasop_general_rotate(MockerTestCase):
 
     def test_one_atom_pdb(self):
         self.o.read_pdb(DataPath+'1ATM.pdb')
-        axis = 'x'
         frame = 0
         theta=numpy.pi/2.0
         #
@@ -77,8 +76,11 @@ class Test_intg_sasop_general_rotate(MockerTestCase):
         result_com  = self.o.calccom(0)
         print '\nresult_coor:\n'; util.printfl([result_coor]); print '\nresult_com:\n',util.printfl([result_com])
         #
-        expected_coor = numpy.array([[[-215.775, 167.484, 356.058]]], floattype)
-        expected_com = numpy.array([-215.775, 167.484, 356.058], floattype)
+        # values changed from original 3/2019: jec
+        #expected_coor = numpy.array([[[-215.775, 167.484, 356.058]]], floattype)
+        expected_coor = numpy.array([[[ 185.11319946, -366.78525318,  180.52335567]]], floattype)
+        #expected_com = numpy.array([-215.775, 167.484, 356.058], floattype)
+        expected_com = numpy.array([ 185.11319946, -366.78525318,  180.52335567], floattype)
         self.assert_list_almost_equal(expected_coor, result_coor,3)
         self.assert_list_almost_equal(expected_com, result_com,3)
 
@@ -92,7 +94,9 @@ class Test_intg_sasop_general_rotate(MockerTestCase):
         result_com  = self.o.calccom(0)
         print '\nresult_com:\n',util.printfl([result_com])
         #
-        expected_com = numpy.array([-221.139, 178.873, 343.429], floattype)
+        # values changed from original 3/2019: jec
+        #expected_com = numpy.array([-221.139, 178.873, 343.429], floattype)
+        expected_com = numpy.array([ 192.1346663,  -367.40029744,  164.14332415], floattype)
         self.assert_list_almost_equal(expected_com, result_com,2)
 
 
@@ -105,7 +109,9 @@ class Test_intg_sasop_general_rotate(MockerTestCase):
         result_com  = self.o.calccom(0)
         print '\nresult_com:\n',util.printfl([result_com])
         #
-        expected_com = numpy.array([-30.425, -38.942, 44.267], floattype)
+        # values changed from original 3/2019: jec
+        #expected_com = numpy.array([-30.425, -38.942, 44.267], floattype)
+        expected_com = numpy.array([ 16.7400629,   6.55999107, 63.86303707], floattype)
         self.assert_list_almost_equal(expected_com, result_com,2)
 
 
@@ -118,7 +124,9 @@ class Test_intg_sasop_general_rotate(MockerTestCase):
         result_com  = self.o.calccom(0)
         print '\nresult_com:\n',util.printfl([result_com])
         #
-        expected_com = numpy.array([-6.978, 9.775, 9.300], floattype)
+        # values changed from original 3/2019: jec
+        #expected_com = numpy.array([-6.978, 9.775, 9.300], floattype)
+        expected_com = numpy.array([ 6.97775495,  9.77488187, -9.30026576],floattype)
         self.assert_list_almost_equal(expected_com, result_com,2)
 
 
