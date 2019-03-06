@@ -459,7 +459,13 @@ class Files(object):
                 sy = "{0:8.3f}".format(float(self._coor[frame,i,1]))[:8]
                 sz = "{0:8.3f}".format(float(self._coor[frame,i,2]))[:8]
 
-                infile.write("%-6s%5s %-4s%1s%-4s%1s%4s%1s   %8s%8s%8s%6s%6s      %-4s%2s%2s\n" % (self._atom[i],this_index,self._name[i],self._loc[i],self._resname[i],self._chain[i],this_resid,self._rescode[i],sx,sy,sz,self._occupancy[i],self._beta[i],self._segname[i],self._element[i],self._charge[i]))
+                beta_f = "{0:6.2f}".format(float(self._beta[i]))[:6]
+                occupancy_f = "{0:6.2f}".format(float(self._occupancy[i]))[:6]
+
+                #infile.write("%-6s%5s %-4s%1s%-4s%1s%4s%1s   %8s%8s%8s%6s%6s      %-4s%2s%2s\n" % (self._atom[i],this_index,self._name[i],self._loc[i],self._resname[i],self._chain[i],this_resid,self._rescode[i],sx,sy,sz,self._occupancy[i],self._beta[i],self._segname[i],self._element[i],self._charge[i]))
+
+                infile.write("%-6s%5s %-4s%1s%-4s%1s%4s%1s   %8s%8s%8s%6s%6s      %-4s%2s%2s\n" % (self._atom[i],this_index,self._name[i],self._loc[i],self._resname[i],self._chain[i],this_resid,self._rescode[i],sx,sy,sz,occupancy_f,beta_f,self._segname[i],self._element[i],self._charge[i]))
+
             except:
                 print '\n>>>> ERROR IN WRITE_PDB <<<<\n'
                 print '>> i = ',i
@@ -571,7 +577,13 @@ class Files(object):
         resids_mask = numpy.zeros((number_of_resids,natoms),numpy.int)
         chains_mask = numpy.zeros((number_of_chains,natoms),numpy.int)
         occupancies_mask = numpy.zeros((number_of_occupancies,natoms),numpy.int)
+    
+        ## added to deal with conversion of beta & occupancy to floats
+        noccupancy = [ float("{:6.2f}".format(x)) for x in occupancy ]
+        nbeta = [ float("{:6.2f}".format(x)) for x in beta ]
+         
         betas_mask = numpy.zeros((number_of_betas,natoms),numpy.int)
+        
         elements_mask = numpy.zeros((number_of_elements,natoms),numpy.int)
         segnames_mask = numpy.zeros((number_of_segnames,natoms),numpy.int)
 
@@ -583,8 +595,13 @@ class Files(object):
             resnames_mask[unique_resnames.index(resname[i])][i] = 1
             resids_mask[unique_resids.index(resid[i])][i] = 1
             chains_mask[unique_chains.index(chain[i])][i] = 1
-            occupancies_mask[unique_occupancies.index(occupancy[i])][i] = 1
-            betas_mask[unique_betas.index(beta[i])][i] = 1
+
+            #occupancies_mask[unique_occupancies.index(occupancy[i])][i] = 1
+            #betas_mask[unique_betas.index(beta[i])][i] = 1
+
+            occupancies_mask[unique_occupancies.index(noccupancy[i])][i] = 1
+            betas_mask[unique_betas.index(nbeta[i])][i] = 1
+
             elements_mask[unique_elements.index(element[i])][i] = 1
             segnames_mask[unique_segnames.index(segname[i])][i] = 1
 
@@ -660,7 +677,7 @@ class Files(object):
         x=[] ; y=[] ; z=[] 
         occupancy=[] ; beta=[] ; segname=[] ; element=[] ; charge=[] ; moltype=[] ; conect = {}
         residue_flag = [] ; original_resid=[] ; header = []
-	
+        original_occupancy = [] ; original_beta = []	
         # first check to see how many frames are in the file
 
         num_model = 0
@@ -786,7 +803,7 @@ class Files(object):
                     this_resid = locale.atoi(lin[22:26])			#	23-26		residue sequence number
                     original_resid.append(this_resid)               #	23-26		residue sequence number
                 except:
-                    this_resid = int(lin[22:66],16) 
+                    this_resid = int(lin[22:26],16) 
                     original_resid.append(this_resid)               #	23-26		residue sequence number
                 #finally:
                 #    original_index.append(lin[22:26])
@@ -802,25 +819,26 @@ class Files(object):
 				
                 residue_flag.append(False)
 
+                try:	
+                    string_occupancy = lin[54:60]
+                    this_occupancy = locale.atof(string_occupancy)			#	55-60 occupancy 
+                    original_occupancy.append(this_occupancy)               #	
+                except:
+                    this_occupancy = 0.00
+
+                occupancy.append(this_occupancy) 
+
+                try:
+                    string_beta = lin[61:66]
+                    this_beta = locale.atof(string_beta)			#	55-60 temperature factor 
+                    original_beta.append(this_beta)               #	
+                except:
+                    this_beta = 0.00
+
+                beta.append(this_beta) 
+
                 if not pdbscan:
 
-                    try:	
-                        occupancy.append(string.strip(lin[54:60]))      #	55-60		occupancy
-                        this_occupancy =string.strip(lin[54:60])      #	55-60		occupancy
-                        if(occupancy[-1] == ''):
-                            occupancy[-1] = "  1.00"
-                            this_occupancy[-1] = "  1.00"
-                    except:
-                        occupancy.append("  0.00")
-                        this_occupancy = "  0.00"
-                    try:
-                        beta.append(string.strip(lin[60:66]))		#	61-66		temperature factor
-                        this_beta = string.strip(lin[60:66])		#	61-66		temperature factor
-                        if(beta[-1] == ''):
-                            beta[-1] = "  0.00"
-                    except:
-                        beta.append("  0.00")
-                        this_beta = "  0.00"
                     try:
                         segname.append(string.strip(lin[72:76]))	#	73-76		segment identifier
                         this_segname = string.strip(lin[72:76])	#	73-76		segment identifier
@@ -844,10 +862,6 @@ class Files(object):
                         charge.append("  ")
 
                 else:
-                    occupancy.append(string.strip(lin[54:60]))      #	55-60		occupancy
-                    this_occupancy =string.strip(lin[54:60])      #	55-60		occupancy
-                    beta.append(string.strip(lin[60:66]))		#	61-66		temperature factor
-                    this_beta = string.strip(lin[60:66])		#	61-66		temperature factor
                     segname.append(string.strip(lin[72:76]))	#	73-76		segment identifier
                     this_segname = string.strip(lin[72:76])	#	73-76		segment identifier
                     element.append(string.strip(lin[76:78]))	#	77-78		element symbol
@@ -901,7 +915,10 @@ class Files(object):
                     if(this_frame == 1):
                         self._atom=atom ; self._index=index  ; self._original_index = original_index ; self._name=name ; self._loc=loc ; self._resname=resname ; self._residue_flag = residue_flag
                         self._chain=chain ; self._resid=resid ; self._rescode=rescode ; self._original_resid=original_resid
-                        self._occupancy=occupancy ; self._beta=beta ; self._segname=segname ; self._element=element
+                        self._occupancy=numpy.array(occupancy, numpy.float32) 
+                        self._beta=numpy.array(beta, numpy.float32) 
+
+                        self._segname=segname ; self._element=element
                         self._charge=charge ; self._moltype=moltype
                         
                         self._number_of_names = len(unique_names) ; self._names = unique_names

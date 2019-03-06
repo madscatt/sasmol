@@ -76,8 +76,10 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
       self.assertEqual([item.resname() for item in self.o.init_child('resnames')],[['ILE']])
       self.assertEqual([item.resid() for item in self.o.init_child('resids')],[[515]])
       self.assertEqual([item.chain() for item in self.o.init_child('chains')],[['N']])
-      self.assertEqual([item.occupancy() for item in self.o.init_child('occupancies')],[['1.00']])
-      self.assertEqual([item.beta() for item in self.o.init_child('betas')],[['36.37']])
+      #self.assertEqual([item.occupancy() for item in self.o.init_child('occupancies')],[['1.00']])
+      #self.assertEqual([item.occupancy() for item in self.o.init_child('occupancies')],[[1.00]])
+      #self.assertEqual([item.beta() for item in self.o.init_child('betas')],[['36.37']])
+      self.assertEqual([item.beta() for item in self.o.init_child('betas')],numpy.array([[36.37]], numpy.float32))
       #self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['DUM0']])
       self.assertEqual([item.segname() for item in self.o.init_child('segnames')],[['N']])
       self.assertEqual([item.element() for item in self.o.init_child('elements')],[['N']])
@@ -168,9 +170,11 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
       print 'result \n',result
       #
       expected = [['1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00']]
+      expected = numpy.array(expected, numpy.float32)
       print 'expected \n',expected
       #
-      self.assertEqual(expected, result)
+      #self.assertEqual(expected, result)
+      self.assertTrue((expected == result).all())
 
    def test_2AAD_betas(self):
       '''
@@ -187,8 +191,10 @@ class Test_intg_sasio_Files_initialize_children(MockerTestCase):
       #
       expected = [['36.37'], ['36.23'], ['36.32'], ['36.04'], ['36.69'], ['38.12'], ['34.42'], ['39.85'], ['35.01'], ['35.51'], ['38.09'], ['36.94'], ['36.74'], ['37.19'], ['34.44']]
       print 'expected \n',expected
+      expected = numpy.array(expected, numpy.float32)
       #
-      self.assertEqual(expected, result)
+      #self.assertEqual(expected, result)
+      self.assertTrue((expected == result).all()) 
 
    def test_2AAD_elements(self):
       '''

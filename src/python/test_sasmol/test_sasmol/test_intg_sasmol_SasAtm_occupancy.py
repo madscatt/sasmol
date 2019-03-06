@@ -18,6 +18,8 @@
 
 from sasmol.test_sasmol.util import env, util
 import sasmol.sasmol as sasmol
+import numpy
+
 from unittest import main 
 from mocker import Mocker, MockerTestCase
 
@@ -36,14 +38,18 @@ class Test_intg_sasmol_SasAtm_occupancy(MockerTestCase):
 	   '''
       #
       expected = ['1.00']*327
+      expected = numpy.array(expected, numpy.float32)
       #
       self.o.read_pdb(DataPath+'1CRN-3frames.pdb')
       #
       result = self.o.occupancy()
-      print result
       #
-      self.assertEqual(expected, result)
-
+      #self.assertEqual(expected, result)
+      print 'expected = ', expected
+      print 'result = ', result
+      print 'type(expected) = ', type(expected)
+      print 'type(result) = ', type(result)
+      self.assertTrue((expected == result).all())
 
    def tearDown(self):
       pass

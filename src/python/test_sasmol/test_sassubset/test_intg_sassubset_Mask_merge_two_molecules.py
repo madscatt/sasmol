@@ -72,7 +72,6 @@ import os
 PdbDataPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','data','pdb_common')+os.path.sep
 
 class Test_sassubset_Mask_merge_two_molecules(MockerTestCase): 
- 
 
    def setUp(self):
       self.o1=sasmol.SasMol(0)
@@ -95,6 +94,7 @@ class Test_sassubset_Mask_merge_two_molecules(MockerTestCase):
    def assert_pdb(self, o1, o2, o3):
       frame = 0
       try:
+      #if True:
          self.assertEqual(o1.atom()+o2.atom(), o3.atom())
          self.assert_list_almost_equal(list(o3.index()), range(1,len(list(o3.index()))+1))
          self.assertEqual(o1.name()+o2.name(), o3.name())
@@ -106,13 +106,31 @@ class Test_sassubset_Mask_merge_two_molecules(MockerTestCase):
          self.assert_list_almost_equal(list(o1.coor()[frame,:,0])+list(o2.coor()[frame,:,0]), list(o3.coor()[frame,:,0]))  
          self.assert_list_almost_equal(list(o1.coor()[frame,:,1])+list(o2.coor()[frame,:,1]), list(o3.coor()[frame,:,1]))  
          self.assert_list_almost_equal(list(o1.coor()[frame,:,2])+list(o2.coor()[frame,:,2]), list(o3.coor()[frame,:,2]))  
-         self.assertEqual(o1.occupancy()+o2.occupancy(), o3.occupancy())
-         self.assertEqual(o1.beta()+o2.beta(), o3.beta())
+
+         self.assertEqual(o1.occupancy().tolist()+o2.occupancy().tolist(), o3.occupancy().tolist())
+
+         #self.assertEqual(o1.occupancy()+o2.occupancy(), o3.occupancy())
+         #self.assertEqual(o1.beta()+o2.beta(), o3.beta())
+         #self.assertTrue((o1.occupancy()+o2.occupancy() == o3.occupancy()).all())
+         #sum_o = o1.occupancy().tolist() + o2.occupancy().tolist() 
+         #print 'sum_o[0] = ', sum_o[0]
+         #print 'sum_o[-1] = ', sum_o[-1]
+         #print 'o3.occupancy()[0] = ', o3.occupancy()[0]
+         #print 'o3.occupancy()[-1] = ', o3.occupancy()[-1]
+
+         #self.assertTrue((sum_o == o3.occupancy()).all())
+
+
+         self.assertEqual(o1.beta().tolist()+o2.beta().tolist(), o3.beta().tolist())
+
+         #self.assertEqual(o1.beta()+o2.beta(), o3.beta())
+         #self.assertTrue((o1.beta()+o2.beta() == o3.beta()).all())
          self.assertEqual(o1.segname()+o2.segname(), o3.segname())
          self.assertEqual(o1.element()+o2.element(), o3.element())
          self.assertEqual(o1.charge()+o2.charge(), o3.charge())
          self.assertEqual(o1.moltype()+o2.moltype(), o3.moltype())
       except:
+      #else:
          raise Exception
 
    def test_null_1(self):
@@ -197,6 +215,7 @@ class Test_sassubset_Mask_merge_two_molecules(MockerTestCase):
       self.o2.read_pdb(PdbDataPath+'1ATM.pdb')
       #
       error = self.o3.merge_two_molecules(self.o1, self.o2)
+      print 'error = ', error  
       #
       expecting_error = False
       #

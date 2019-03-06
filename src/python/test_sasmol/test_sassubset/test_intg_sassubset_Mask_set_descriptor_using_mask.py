@@ -323,7 +323,8 @@ class Test_sassubset_Mask_set_descriptor_using_mask(MockerTestCase):
       #
       print '\nexpected_descriptor:\n',expected_descriptor,'\ndescriptor\n',descriptor
       self.assertEqual(len(error)>0, expecting_error)
-      self.assertEqual(expected_descriptor, descriptor)
+      #self.assertEqual(expected_descriptor, descriptor)
+      self.assertTrue((expected_descriptor == descriptor).all())
 
 
    def test_rna_3(self):
@@ -369,7 +370,8 @@ class Test_sassubset_Mask_set_descriptor_using_mask(MockerTestCase):
       #
       print '\nexpected_descriptor:\n',expected_descriptor,'\ndescriptor\n',descriptor
       self.assertEqual(len(error)>0, expecting_error)
-      self.assertEqual(expected_descriptor, descriptor)
+      #self.assertEqual(expected_descriptor, descriptor)
+      self.assertTrue((expected_descriptor == descriptor).all())
       
 
    def test_1CRN_2(self):
