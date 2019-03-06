@@ -440,6 +440,7 @@ class Mask(object):
 			error.append('failed in merge molecule when assigning coordinates')
 			return error
 
+		resid = numpy.array(resid, numpy.int)
 		beta = numpy.array(beta, numpy.float32)
 		occupancy = numpy.array(occupancy, numpy.float32)
 
